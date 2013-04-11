@@ -2,6 +2,21 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
+\usepackage{libertine}
+\usepackage{soul}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+
+\hypersetup{
+  colorlinks=true,
+  citecolor=ForestGreen,
+}
 
 %opening
 \title{Classification d'occurences du pronom personnel \og{}\textit{il}\fg{} selon s'il est co-référentiel ou non}
@@ -99,7 +114,6 @@ Nous retenons divers types de traits :
  \begin{itemize}
   \item Présence de déterminant possessif 3e personne (ses, son, sa...)
   \item Présence d'un acronyme
-  \item Présence du verbe falloir
   \item Présence du pronom 'lui'
   \item Présence d'une autre occurence de 'il'
   \item Présence d'une date/time ?
@@ -111,8 +125,15 @@ Nous retenons divers types de traits :
  \end{itemize}
  \item[\textbullet] Certains patrons fréquents (booléens) :
  \begin{itemize}
-  \item il y a (pas de verbe) / il s'agit ...
-  \item il se verbe (pas que)
+  \item verbes météorologiques (brouillasser, bruiner, brumasser, brumer, crachiner, gouttiner, grêler, neigeoter, neiger, pleuvasser, pleuviner, pleuvioter, pleuvoir, pleuvoter,  pluviner, reneiger, repleuvoir, surventer, tonner, venter, verglacer)
+  \item autres verbes impersonnels (advenir, s'agir, s'ensuivre, incomber, résulter?, falloir, apparoir, barder, bichoter, dracher, s'en falloir, se pouvoir, y avoir)
+  \item structures impersonnelles de temps (il est temps de/que, il est l'heure de/que)
+  \item patrons fréquents (Il arrive que, il paraît que, il semble que, il se peut que, il me semble que, il vaut mieux que (ou il vaut mieux + infinitif), il suffit que (ou il suffit que + infinitif), etc.)
+  \item expressions avec il impersonnel (il était une fois, il y a, quoi qu'il en soit,...)
+  \item verbes déclaratifs (dire, affirmer, annoncer, croire, prétendre,...) sauf forme passive
+  \item verbes de sentiment (admirer, craindre, s'étonner,...)
+  \item verbes de volonté (vouloir, exiger, désirer, souhaiter, supplier, prier,...) sauf forme passive
+  \item verbes d'opinion (croire, douter, imaginer, penser, estimer, juger,...)
  \end{itemize}
 \end{itemize}
 
