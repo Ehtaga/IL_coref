@@ -12,10 +12,11 @@
 \usepackage{hyperref}
 \usepackage{fixltx2e}
 \usepackage{graphicx}
+\usepackage{xcolor}
 
 \hypersetup{
   colorlinks=true,
-  citecolor=ForestGreen,
+  citecolor=blue,
 }
 
 %opening
@@ -27,7 +28,25 @@
 \maketitle
 
 \begin{abstract}
-% TODO
+Dans cet article, nous nous intéressons au problème de la détermination du caractère co-référentiel du pronom personnel \og \textit{il} \fg{}, que nous traitons comme une tâche d'apprentissage automatique supervisé. Nous présentons deux expériences utilisant les algorithmes CRF de l'étiquetage de séquences, réalisées sur le corpus Tutin et al. (2005). La première utilise les traits classiques de la détection de segments pour le français. Pour la seconde, nous ajoutons des traits recensés dans la littérature ou observés sur le corpus de développement. Nous montrons que ....
+\end{abstract}
+
+\renewcommand\abstractname{Abstract}
+\begin{abstract}
+In this article, we deal with the problem of determining whether the french pronoun \og \textit{il} \fg{} is coreferential, using a supervised machine learning approach. We present two experiments with CRF algorithms for sequence labeling, done on the Tutin corpus. The first one uses classic features for french chunks detection. For the second one, we add features identified in the litterature and by observation. We show that.....
+\end{abstract}
+
+
+\paragraph{}
+
+\renewcommand\abstractname{Mots-clés}
+\begin{abstract}
+Co-référence, Apprentissage automatique, Pronom anaphorique, Pronom impersonnel, Résolution d'anaphores
+\end{abstract}
+
+\renewcommand\abstractname{Keywords}
+\begin{abstract}
+Co-reference, Machine Learning, Anaphoric pronoun, Expletive pronous, Anaphora resolution
 \end{abstract}
 
 \section*{Introduction}
@@ -38,7 +57,7 @@ Les anaphores sont des expressions qui permettent de désigner des entités dans
 Dans ce contexte, nous avons travaillé sur un problème plus particulier : la détermination de l'aspect co-référentiel d'une expression.
 
 \paragraph{}
-Au sein de cette problématique, les pronoms sont beaucoup traités car ils ont pour avantage d'être fréquents et facilement identifiables (Danlos, 2005). 
+Au sein de cette problématique, les pronoms sont beaucoup traités car ils ont pour avantage d'être fréquents et facilement identifiables (Danlos\cite{danlos:ilimp:taln2005}, 2005). 
 Parmi ceux-ci, on peut distinguer le pronom personnel de la 3\up{ème} personne du singulier, masculin : \og{}\textit{il}\fg{}. 
 En effet, selon les cas, celui-ci peut s'avérer : 
 \begin{itemize}
@@ -49,10 +68,10 @@ Lorsqu'un pronom n'est pas co-référent, on le qualifie d'impersonnel.
 
 \paragraph{}
 Il existe actuellement plusieurs techniques traitant du pronom personnel \og{}\textit{it}\fg{} en anglais.
-Certaines sont à base de règles lexico-syntaxiques (Lappin et al. 1994), d'autres à base d'apprentissage (Li et al. 2009) ou d'observations statistiques (Bergsma et al. 2011).
+Certaines sont à base de règles lexico-syntaxiques (Lappin et al.\cite{Lappin:1994:APA:203987.203989} 1994), d'autres à base d'apprentissage (Li et al.\cite{Li:2009:IPU:1622716.1622726} 2009) ou d'observations statistiques (Bergsma et al.\cite{Bergsma:11} 2011).
 
 
-Pour le français, il n'existe qu'un outil à base de règles (Danlos 2005). Celui-ci obtient de très bons résultats, mais les outils à base de règles manquent généralement de robustesse. Par ailleurs, il est dépendant d'un outil tiers (UNITEX), rendant plus difficile une désolidarisation du prétraitement. 
+Pour le français, il n'existe qu'un outil à base de règles (Danlos 2005). Celui-ci obtient de très bons résultats, mais les outils à base de règles manquent généralement de robustesse. Par ailleurs, il est dépendant d'un outil tiers (UNITEX\footnote{http://www-igm.univ-mlv.fr/~unitex/\#}), rendant plus difficile une désolidarisation du prétraitement. 
 
 \paragraph{}
 L'objectif de notre travail est donc d'établir un système déterminant le caractère co-référentiel du \og{}\textit{il}\fg{} français. L'approche à base de règles est abandonnée au profit d'une approche à base d'apprentissage automatique supervisé, cette tâche pouvant être considérée comme une classification (prédiction d'étiquettes). Par ailleurs, on peut aussi chercher à définir la tâche comme un problème d'étiquetage de séquence (Sequence labeling), de par sa sensibilité au contexte local.
@@ -62,7 +81,7 @@ Notre tâche pouvant être définie selon ces deux approches, il convient de les
 \paragraph{}
 En l'état de notre avancement, nous ne rapportons pour l'instant que les deux expériences à base de sequence labeling.
 
-Pour réaliser celles-ci, nous disposons du corpus Tutin et al. (2005). 
+Pour réaliser celles-ci, nous disposons du corpus Tutin et al.\cite{tutin:hal-00373327} (2005). 
 
 La première expérience consiste à utiliser les traits classiques de la détection de segments pour le français. Pour la deuxième, nous dégageons de nouveaux traits par observation du corpus de développement (un dixième du corpus total) et par recensement des traits de la littérature.
 
@@ -74,7 +93,7 @@ Dans un second temps, nous présentons le déroulement des expériences que nous
 Nous terminons cet article par une discussion sur le travail effectué et sur ce qui pourrait être intéressant d'exploiter à l'avenir.
 
 
-\section{Etat de l'art}
+\section{État de l'art}
 
 Pour résoudre cette tâche, nous nous sommes appuyés sur les seuls travaux à notre connaissance en français et sur l'un des plus récents pour l'anglais.
 
@@ -83,7 +102,7 @@ En effet, les travaux de Lappin et Leass utilisent des règles qui s'appuient su
 
 \paragraph{}
 L'approche à base de règles développée pour le français est l'outil ILIMP, conçu pour classer les occurrences du pronom \og{}\textit{il}\fg{} selon si elles sont anaphoriques ou impersonnelles (Danlos 2005). Cet outil travaille sur des textes bruts, non annotés.
-La démarche est la suivante : dans un premier temps, on observe des constructions de phrases particulières qui permettent d'établir des patrons (en partant du principe que les entités lexicales employées avec le \og{}\textit{il}\fg{} sont déterminantes). Ces patrons sont écrits grâce à l'outil UNITEX (ref) (effectuant une tokénisation, un étiquetage morpho-syntaxique ainsi que des traits flexionnels).
+La démarche est la suivante : dans un premier temps, on observe des constructions de phrases particulières qui permettent d'établir des patrons (en partant du principe que les entités lexicales employées avec le \og{}\textit{il}\fg{} sont déterminantes). Ces patrons sont écrits grâce à l'outil UNITEX (effectuant une tokénisation, un étiquetage morpho-syntaxique ainsi que des traits flexionnels).
 
 Les règles établies permettent de trouver toutes les occurrences de \og{}\textit{il}\fg{} impersonnelles, et vont les décorer de la balise [IMP] (la balise [ANA] étant définie par défaut).
 Il se trouve que pour chaque phrase, le contexte gauche, même s'il est complexe, est analysable sans trop de difficultés, c'est le contexte droit qui peut poser des ambiguïtés. Par exemple, deux constructions peuvent différer de façon très subtile : \og \textit{Il manque du poivre (dans cette maison)} \fg{}/\og \textit{Il manque de poivre, ce rôti} \fg{} (ici la première construction est impersonnelle et la seconde anaphorique alors qu'elles se distinguent seulement par \textit{du}/\textit{de}) ou encore des constructions comme \og \textit{Il est certain que Fred viendra} \fg{}  qui peuvent être à la fois impersonnelles et anaphoriques. 
@@ -97,7 +116,7 @@ Par ailleurs, les résultats sont meilleurs sur un corpus journalistique que lit
 L'approche pour l'anglais proposée par S. Bergsma et D. Yarowski (2011), va allier l'apprentissage automatique supervisé et des observations statistiques.
 Ce système (NADA : Non-Anaphoric Detection Algorithm) prend en entrée des données tokénisées et détecte les occurences de \og{}\textit{it}\fg{} non-référentielles. Les données en question n'ont pas été analysées morpho-syntaxiquement, car ils font le postulat que l'ambiguïté repose sur la présence d'entités lexicales spécifiques, et non sur les informations morpho-syntaxiques.
 
-Deux types de traits sont alors apportés au classifieur : des traits lexicaux-syntaxiques mais aussi des statistiques tirées du corpus n-gram de Google (ref), le classifieur en question est fondé sur un modèle de régression.
+Deux types de traits sont alors apportés au classifieur : des traits lexicaux-syntaxiques mais aussi des statistiques tirées du corpus n-gram de Google\cite{google-ngram}, le classifieur en question est fondé sur un modèle de régression.
 
 Les traits lexicaux sont extraits sur la phrase entière. Il y a par exemple la présence ou non d'autres formes du pronom personnel (\textit{its}/\textit{itself}, la présence d'acronymes, de prépositions juste avant le nom, de \og{}\textit{that}\fg{} ou \og{}\textit{to}\fg{} après le pronom, etc.
 
@@ -128,7 +147,7 @@ Afin de mettre en place une chaîne de traitement, nous travaillons sur la porti
 \paragraph{}
 Nous transformons cette portion en un corpus au format BIO\footnote{Le format BIO permet d'étiqueter les tokens selon qu'ils débutent (Beginning of -- B), sont à l'intérieur (Inside of -- I), ou sont hors (Outside -- O) de la zone d'intérêt.}. Pour cela, on ne garde que les balises associées aux pronoms \og \textit{il} \fg{}, et on les convertit en étiquettes \verb!B-coref! (début d'une entité de \og \textit{il} \fg{} coréférentielle). On considère ensuite tous les \og \textit{il} \fg{} non annotés comme impersonnels, et on les décore de l'étiquette \verb!B-non-coref!.
 
-Nous disposons à ce stade d'un corpus contenant N occurrences du pronom \og \textit{il} \fg{}, dont N sont coréférentielles, et N impersonnelles.
+Nous disposons à ce stade d'un corpus contenant 1176 occurrences du pronom \og \textit{il} \fg{}, dont 537 sont coréférentielles, et 631 impersonnelles.
 
 \paragraph{}
 Nous divisons ensuite ce corpus en 3 parties. Un dixième est consacré au développement, un autre dixième au test, et tout le reste à l'entraînement du sequence labeler. C'est sur cette dernière partie que nous travaillons ensuite. Pour l'évaluation par validation croisée (voir ci-dessous), nous partitionnons le corpus d'entraînement en 10.
@@ -138,18 +157,18 @@ Nous divisons ensuite ce corpus en 3 parties. Un dixième est consacré au déve
 Nos données mises en place, nous cherchons maintenant à recenser les traits pouvant être utiles à notre tâche.
 
 \paragraph{}
-Notre première expérience consiste à tester les traits classiques utilisés pour la reconnaissance de chunks (TODO : explication chunk). Nous nous sommes appuyés sur le travail d'Isabelle Tellier(ref + explications). Ceux-ci permettent d'observer le contexte local des occurrences à savoir : les formes de surface et étiquettes morpho-syntaxiques dans une fenêtre de 5 tokens (unigrammes et bigrammes), les préfixes et suffixes entre 1 et 4 caractères, la présence de majuscules, de ponctuation ou de chiffres dans une fenêtre de 3 tokens, si le token étudié est composé uniquement de majuscules/ponctuation/chiffres et enfin s'il commence par une majuscule.
+Notre première expérience consiste à tester les traits classiques utilisés pour la reconnaissance de chunks. Les chunks sont des unités lexicales qui définissent la structure syntaxique superficielle des phrases (groupes nominaux, groupes verbaux, etc.). Nous nous sommes appuyés sur le travail d'Isabelle Tellier qui a mis en place un chunker à l'aide des CRF et de Wapiti\cite{constant:integrer:taln11}. Ces traits permettent d'observer le contexte local des occurrences à savoir : les formes de surface et étiquettes morpho-syntaxiques dans une fenêtre de 5 tokens (unigrammes et bigrammes), les préfixes et suffixes entre 1 et 4 caractères, la présence de majuscules, de ponctuation ou de chiffres dans une fenêtre de 3 tokens, si le token étudié est composé uniquement de majuscules/ponctuation/chiffres et enfin s'il commence par une majuscule.
 
 \paragraph{}
 Pour notre seconde expérience, nous apportons nos propres traits au sequence labeler. Ceux-ci proviennent de la littérature ainsi que de l'observation des données.
 
-Nous avons choisi d'extraire les traits au sein de la phrase, à l'instar des travaux de S. Bergsma et D. Yarowski. En effet, ceux-ci se sont basés sur les procédés humains : ils ont fait l'expérience en demandant à un sujet d'annoter 200 occurrences du \og{}it\fg{} anglais. Celui-ci obtient un taux d'exactitude de 85\% s'il dispose des 4 tokens de chaque côté de l'occurrence, contre 95\% s'il dispose de la phrase entière. Nous faisons l'hypothèse que cette fenêtre est aussi plus judicieuse pour le texte français.
+Nous avons choisi d'extraire les traits additionnels au sein de la phrase, à l'instar des travaux de S. Bergsma et D. Yarowski. En effet, ceux-ci se sont basés sur les procédés humains : ils ont fait l'expérience en demandant à un sujet d'annoter 200 occurrences du \og{}it\fg{} anglais. Celui-ci obtient un taux d'exactitude de 85\% s'il dispose des 4 tokens de chaque côté de l'occurrence, contre 95\% s'il dispose de la phrase entière. Nous faisons l'hypothèse que cette fenêtre est aussi plus judicieuse pour le texte français.
 
 Voici les traits retenus :
 
 \paragraph{}
 \begin{itemize}
- \item[\textbullet] L'observation des formes de surface autour de l'occurence :
+ \item[\textbullet] L'observation des formes de surface autour de l’occurrence :
  \begin{itemize}
   \item Premier adjectif/verbe/adverbe/préposition après
   \item Première combinaison telle verbe+préposition après
@@ -161,7 +180,7 @@ Voici les traits retenus :
   \item Présence de déterminant possessif 3e personne (ses, son, sa...)
   \item Présence d'un acronyme
   \item Présence du pronom 'lui'
-  \item Présence d'une autre occurence de 'il'
+  \item Présence d'une autre occurrence de 'il'
   \item Présence d'une date/time ?
  \end{itemize}
  \item[\textbullet] Les statistiques sur la phrase (entiers) :
@@ -195,19 +214,46 @@ Voici les traits retenus :
 
 \section{Cadre expérimental}
 
-Une fois les traits définis, nous pouvons construire une modélisation et entraîner notre sequence labeler. Cette modélisation permettra par la suite de prédire le caractère co-référentiel pour les nouvelles occurrences de \og{}\textit{il}\fg{}.
+Nous avons opté pour une expérimentation par étiquetage de séquences. En apprentissage automatique, ce type de tâche consiste à assigner une étiquette à chaque élément d'une séquence, compte tenu du contexte proche.
+
+Nous utilisons pour cela l'outil Wapiti\footnote{http://wapiti.limsi.fr} proposé par Thomas Lavergne, implémentant les algorithmes de CRF (Conditional Random Fields) linéaires.
+
+Le principe du modèle CRF appliqué à l'étiquetage de séquences est le suivant : on observe dans un premier temps des comportements similaires dans le voisinage de l'élément, puis on apprend à l'aide de probabilités distributionnelles les répétitions de contextes locaux, afin d'obtenir des \og règles \fg{}. Celles-ci permettent ensuite de prédire les étiquettes de nouveaux éléments.
 
 
 \subsection{Mise en place d'une chaîne de traitement}
 
-\paragraph{}
-Les traits sont définis à l'aide de l'outil Wapiti (ref). Celui-ci prend en entier des fichiers tabulés décrivant chaque token : une ligne correspond à un token, et chaque colonne contient une information telle que forme de surface, étiquetage morpho-syntaxique, flexions, \ldots. La dernière colonne contient la classe que l'on recherche, ici l'annotation au format BIO .
+Wapiti prend en entier des fichiers tabulés décrivant chaque token : une ligne correspond à un token, et chaque colonne contient une information telle que forme de surface, étiquetage morpho-syntaxique, flexions, \ldots. La dernière colonne contient la classe que l'on recherche, ici l'annotation au format BIO .
 
 \paragraph{}
-Nous avons préalablement prétraité les données avec les analyseurs Apache OpenNLP (ref). Puis, à l'aide de scripts Bash, nous mettons en place nos fichiers tabulés contenant les informations nécessaires à l'extraction de traits
+Nous avons préalablement prétraité les données avec les analyseurs Apache OpenNLP\footnote{https://opennlp.apache.org/}\cite{boudin:detection:taln12}. 
+Ce prétraitement nous permet d'obtenir les étiquettes morpho-syntaxiques ainsi que les traits flexionnels.
+Puis, à l'aide de scripts Bash, nous mettons en place nos fichiers tabulés contenant les informations nécessaires à notre deuxième série d'expériences, à savoir la taille de la phrase, le nombre d'occurrences de \og il \fg{} dans celle-ci, etc.
+
+Au final, notre fichier tabulé contient les colonnes suivantes :
+\begin{itemize}
+\item forme de surface du token
+\item étiquette morpho-syntacique
+\item traits flexionnels
+\item taille de la phrase
+\item nombre d'occurrences de \og il \fg{} dans la phrase
+\item nombre d'occurrences de \og lui \fg{} dans la phrase
+\item nombre de possessifs à la 3ème personne du singulier dans la phrase
+\item verbe précédent le token
+\item préposition précédente
+\item adverbe précédent
+\item adjectif précédent
+\item  conjonction précédente
+\item verbe suivant
+\item préposition suivante
+\item adverbe suivant
+\item adjectif suivant
+\item clitique suivant
+\item étiquette BIO représentant la classe (\verb!B-coref! ou \verb!B-non-coref!)
+\end{itemize} 
 
 \paragraph{}
-Wapiti requiert aussi un fichier de patrons, permettant d'extraire les traits à partir de notre fichier tabulé. Nous utilisons le fichier \emph{chpattern.txt}, établi par Isabelle Tellier pour ses travaux sur la reconnaissance de chunks, auquel nous avons ajouté nos propres patrons.
+Wapiti requiert aussi un fichier de patrons, permettant d'extraire les traits à partir de notre fichier tabulé. Nous utilisons le fichier \emph{chpattern.txt}, établi par Isabelle Tellier pour ses travaux sur la reconnaissance de chunks, auquel nous ajoutons par la suite nos propres patrons.
 
 \paragraph{}
 A partir de ces traits, nous pouvons dorénavant entraîner notre modèle.
@@ -215,23 +261,38 @@ A partir de ces traits, nous pouvons dorénavant entraîner notre modèle.
 
 \subsection{Baseline}
 
-
+Nous considérons que la Baseline correspond à un étiquetage systématique en \verb!B-non-coref!, celle-ci étant la classe majoritaire.
+Le taux d'occurrences correctement classées est donc de 53.66\%.
 
 \subsection{Evaluation}
 
-Nous évaluons le système obtenu par validation croisée avec 10 partitions. Les mesures utilisées seront la précision, le rappel et la F-mesure.
+Nous évaluons le système obtenu par validation croisée avec 10 partitions. Les mesures utilisées sont le taux d'occurrences correctement classées (exactitude) et pour chaque classe : la précision, le rappel et la F-mesure.
+
+Par exemple, pour la classe \verb!B-coref!, les mesures sont données par les formules suivantes :
 
 \[ Precision = \frac{Nombre\ d'occurences\ correctement\ classees\ COREF}{Nombre\ d'occurences\ classees\ COREF} \]
 
-\[ Rappel = \frac{Nombre\ d'occurences\ correctement\ classees\ COREF}{Nombre\ d'occurences\ annotees\ comme\ referentielles} \]
+\[ Rappel = \frac{Nombre\ d'occurences\ classees\ COREF}{Nombre\ d'occurences\ annotees\ comme\ referentielles} \]
 
-\[ F-mesure = \frac{2 * (Precision * Rappel)}{(Precision + Rappel)} \]
+\[ F\-mesure = \frac{2 * (Precision * Rappel)}{(Precision + Rappel)} \]
 
 Wapiti étant assez long à calculer le modèle, nous évaluons dans un premier temps uniquement sur la première partition.
 
 \subsubsection{Expérience avec les traits classiques de reconnaissance des chunks}
 
+\begin{tabular}[H]{l|lll|lll}
+& \multicolumn{3}{c|}{B-coref} & \multicolumn{3}{c}{B-non-coref}\\
+Exactitude & Précision & Rappel & F-mesure & Précision & Rappel & F-mesure\\
+\hline
+\end{tabular}
+
 \subsubsection{Série d'expériences avec incorporation de nouveaux traits}
+
+\begin{tabular}[H]{l|lll|lll}
+& \multicolumn{3}{c|}{B-coref} & \multicolumn{3}{c}{B-non-coref}\\
+Exactitude & Précision & Rappel & F-mesure & Précision & Rappel & F-mesure\\
+\hline
+\end{tabular}
 
 \section{Discussion}
 
@@ -256,5 +317,8 @@ Par ailleurs, il pourrait être judicieux de nettoyer les données avant de les 
 \section*{Remerciements}
 
 Nicolas Hernandez
+
+\bibliographystyle{plain}
+\bibliography{biblio}
 
 \end{document}
