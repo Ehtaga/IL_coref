@@ -9,25 +9,26 @@
 
 \hypersetup{
   colorlinks=true,
-  citecolor=blue,
+  citecolor=black!60!blue,
+  linkcolor=black!40!red,
 }
 
-%opening
 \title{Détermination du caractère anaphorique du pronom personnel \og{}\textit{il}\fg{}}
 \author{Agathe \textsc{Mollé}}
+\date{}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-Dans cet article, nous nous intéressons au problème de la détermination du caractère co-référentiel du pronom personnel \og \textit{il} \fg{}, que nous traitons comme une tâche d'apprentissage automatique supervisé. Nous présentons deux expériences utilisant d'étiquetage de séquences, réalisées sur le corpus \citet{tutin-hal-00373327}. La première utilise les traits classiques de la détection de segments syntaxiques pour le français. Pour la seconde, nous ajoutons des traits tirés de la littérature ou observés sur le corpus de développement. Nous montrons que l'approche par apprentissage obtient des résultats encourageants.
+Dans cet article, nous nous intéressons au problème de la détermination du caractère anaphorique du pronom personnel \og \textit{il} \fg{}, que nous traitons comme une tâche d'apprentissage automatique supervisé. Nous présentons deux expériences à base d'étiquetage de séquences, réalisées sur le corpus \citet{tutin-hal-00373327}. La première utilise les traits classiques de la détection de segments syntaxiques pour le français. Pour la seconde, nous ajoutons des traits tirés de la littérature ou observés sur le corpus de développement. Nous montrons que l'approche par apprentissage obtient des résultats encourageants.
 \end{abstract}
 
 
 \renewcommand\abstractname{Abstract}
 \begin{abstract}
-In this article, we deal with the problem of determining whether the french pronoun \og \textit{il} \fg{} is coreferential, using a supervised machine learning approach. We present two experiments of sequence labeling, done on the \citet{tutin-hal-00373327} corpus. The first one uses classic features for french chunks detection. For the second one, we add features identified in the litterature and by observation. We show that the learning approach gives encouraging results.
+In this article, we deal with the problem of determining whether the french pronoun \og \textit{il} \fg{} is anaphoric, using a supervised machine learning approach. We present two experiments of sequence labeling, done on the \citet{tutin-hal-00373327} corpus. The first one uses classic features for french chunks detection. For the second one, we add features identified in the litterature and by observation. We show that the learning approach gives encouraging results.
 \end{abstract}
 
 
@@ -45,13 +46,12 @@ Co-reference, Machine Learning, Anaphoric pronoun, Expletive pronoun, Anaphora r
 
 \section*{Introduction}
 
-Les anaphores sont des expressions qui permettent de désigner des entités dans les textes (\og \textit{il} \fg{}, \og \textit{cette maison} \fg{}). Une expression anaphorique n'a de sens que si l'on dispose de son antécédent, autrement dit une expression précédente désignant la même entité. Par exemple, dans la phrase \og \textit{Vendredi, \textbf{M. Edmond Maire} a réuni la presse pour apporter \underline{\textbf{son}} soutien à \underline{\textbf{sa}} fédération des cheminots} \fg{}, les expressions anaphoriques \og \textit{son} \fg{} et \og \textit{sa} \fg{} réfèrent à la même entité que leur antécédent \og \textit{M. Edmond Maire} \fg{}.
+Les anaphores sont des expressions qui permettent de désigner des entités dans les textes (\og \textit{il} \fg{}, \og \textit{cette maison} \fg{}). Une expression anaphorique n'a de sens que si l'on dispose de son antécédent, autrement dit d'une expression précédente désignant la même entité. Par exemple, dans la phrase \og \textit{Vendredi, \textbf{M. Edmond Maire} a réuni la presse pour apporter \underline{\textbf{son}} soutien à \underline{\textbf{sa}} fédération des cheminots} \fg{}, les expressions anaphoriques \og \textit{son} \fg{} et \og \textit{sa} \fg{} réfèrent à la même entité que leur antécédent \og \textit{M. Edmond Maire} \fg{}.
 
-La résolution d'anaphores consiste à déterminer quel est l'antécédent (ou les antécédents) de l'expression anaphorique. C'est une problématique fondamentale partagée par divers domaines du Traitement Automatique des Langues (TAL).
+La résolution d'anaphores consiste à déterminer quel est l'antécédent (ou les antécédents) de l'expression anaphorique. C'est une problématique fondamentale partagée par divers domaines du Traitement Automatique des Langues.
 
 \paragraph{}
 L'une des étapes de cette problématique est la détermination de l'aspect co-référentiel d'une expression.
-
 Dans ce contexte, nous nous intéressons aux pronoms car ils ont pour avantage d'être fréquents et facilement identifiables \citep{danlos-ilimp-taln2005}, et plus particulièrement au pronom personnel de la 3\up{ème} personne du singulier, masculin : \og{}\textit{il}\fg{}. 
 En effet, selon les cas, celui-ci peut s'avérer : 
 \begin{itemize}
@@ -67,11 +67,10 @@ Certaines sont à base de règles lexico-syntaxiques \citep{Lappin-1994-APA-2039
 Pour le français, il n'existe qu'un outil à base de règles \citep{danlos-ilimp-taln2005}. Celui-ci obtient de très bons résultats, mais les outils à base de règles manquent généralement de robustesse. Il est en effet difficile d'énumérer de manière exhaustive toutes les constructions impersonnelles. Par ailleurs, cet outil n'effectue pas de désambiguïsation morpho-syntaxique lors de son prétraitement, il souffre donc d'erreurs liées à l'absence d'analyse syntaxique.
 
 \paragraph{}
-L'objectif de notre travail est d'établir un système déterminant le caractère anaphorique du \og{}\textit{il}\fg{} français. L'approche à base de règles est abandonnée au profit d'une approche à base d'apprentissage automatique supervisé. Cette tâche peut en effet être considérée comme une tâche de classification : en décrivant chaque instance de \og \textit{il} \fg{} par un jeu de traits appropriés, on peut ensuite prédire l'étiquette d'une nouvelle instance, étant donné son vecteur de traits. Par ailleurs, on peut aussi chercher à définir la tâche comme un problème d'étiquetage de séquences syntaxiques (\emph{sequence labeling}), de par sa sensibilité au contexte local. L'approche par étiquetage de séquences syntaxiques se justifie par la volonté d'étendre ces travaux à la détermination du caractère anaphorique des descriptions définies (celles-ci étant des séquences comme\og \textit{l'homme} \fg{}, \og \textit{la maison de Paul} \fg{}, \ldots).
-
-Notre tâche pouvant être définie selon ces deux approches, il convient de les expérimenter toutes deux. Lors de la planification d'expériences, il s'est avéré plus simple de réaliser l'expérience avec l'étiqueteur de séquences\footnote{\samepage L'expérience avec l'étiqueteur de séquences consistait en une extension d'un TP réalisé sur la reconnaissance d'entités nommées}.
+L'objectif de notre travail est d'établir un système déterminant le caractère anaphorique du \og{}\textit{il}\fg{} français. L'approche à base de règles est abandonnée au profit d'une approche à base d'apprentissage automatique supervisé. Cette tâche peut en effet être considérée comme une tâche de classification : en décrivant chaque instance de \og \textit{il} \fg{} par un jeu de traits appropriés, on peut ensuite prédire l'étiquette d'une nouvelle instance, étant donné son vecteur de traits. On peut aussi chercher à définir la tâche comme un problème d'étiquetage de séquences (\emph{sequence labeling}), de par sa sensibilité au contexte local. Dans le cas du pronom \og \textit{il} \fg{}, nous n'avons pas affaire à des séquences proprement dites puisqu'il n'y a qu'un seul élément à étudier. Cependant, l'approche par étiquetage de séquences se justifie par la volonté d'étendre ces travaux à la détermination du caractère anaphorique des descriptions définies (celles-ci étant des séquences comme\og \textit{l'homme} \fg{}, \og \textit{la maison de Paul} \fg{}, \ldots).
 
 \paragraph{}
+Notre tâche pouvant être définie selon ces deux approches, il convient de les expérimenter toutes deux. Lors de la planification d'expériences, il s'est avéré plus simple de réaliser l'expérience avec l'étiqueteur de séquences\footnote{\samepage L'expérience avec l'étiqueteur de séquences consistait en une extension d'un TP réalisé sur la reconnaissance d'entités nommées}.
 En l'état de notre avancement, nous ne rapportons pour l'instant que les deux expériences à base d'étiquetage de séquences.
 Nous expérimentons en effet deux jeux de traits pour caractériser les pronoms et leur contexte.
 La première expérience consiste à utiliser les traits classiques de la détection de segments syntaxiques pour le français. Pour la deuxième, nous dégageons de nouveaux traits par observation du corpus de développement (un dixième du corpus total) et par recensement de traits mentionnés dans la littérature.
@@ -99,11 +98,10 @@ Le travail de L. \citeauthor{danlos-ilimp-taln2005} se définit en deux temps : 
 
 Pour élaborer les règles, \citeauthor{danlos-ilimp-taln2005} observe les propriétés lexicales et syntaxiques des constructions impersonnelles, et plus particulièrement de leur tête lexicale. Elle s'appuie sur le lexique-grammaire du français\footnote{http://infolingu.univ-mlv.fr/} \citep{gross-halshs-00278309,leclere-hal-00192888}
  qui décrit l'ensemble des têtes lexicales des phrases simples du français, avec leurs arguments syntaxiques et les alternances possibles.
-%TODO : reformuler car mots de Danlos). 
 Elle définit alors une liste de verbes, adjectifs et expressions caractérisant des constructions impersonnelles, qu'elle divise d'ailleurs en deux catégories : les constructions intrinsèquement impersonnelles, qui ne peuvent avoir comme sujet que \og \textit{il} \fg{}, et les constructions impersonnelles à sujet profond extraposé (sujet phrastique ou nominal). On peut distinguer par exemple les verbes météorologiques qui ancrent des constructions intrinsèquement impersonnelles (\og \textit{Il pleut} \fg{}), ou alors des adjectifs tels \og \textit{probable} \fg{} qui traduisent des constructions impersonnelles à sujet (phrastique) profond extraposé (\og \textit{Il est probable que Fred viendra} \fg{}).
 
 Pour chaque construction impersonnelle, il se trouve que le contexte gauche de la tête lexicale, même s'il est complexe, est analysable sans trop de difficultés.
-Par exemple, on peut rencontrer les constructions suivantes :
+Par exemple, on peut rencontrer les constructions suivantes\footnote{Les exemples mentionnés sont tirés de l'article \textit{ILIMP : Outil pour repérer les occurrences du pronom impersonnel il} par \citet{danlos-ilimp-taln2005}} :
 
 \og{}\textit{\textbf{Il est} difficile de résoudre ce problème.}\fg{}
 
@@ -115,7 +113,7 @@ Dans ces 3 cas, la tête lexicale est l'adjectif \og \textit{difficile} \fg{} ma
 
 A l'inverse, c'est le contexte droit qui peut poser des ambiguïtés. Celles-ci peuvent être d'ordre syntaxique (une séquence peut recevoir plusieurs analyses syntaxiques), d'ordre lexical (par exemple \og{}\textit{Il est certain que Fred viendra.}\fg{} peut être à la fois anaphorique et impersonnelle) ou alors être dûes à des constructions impersonnelles qui ne diffèrent en surface que de façon très subtile par rapport à des constructions personnelles (\og{}\textit{Il reste la valise du chef}\fg{} (impersonnelle) / \og{}\textit{Il reste la priorité du chef (le chômage)}\fg{} (anaphorique)).
 
-Pour éviter d'avoir trop de constructions considérées comme \og ambiguës \fg{}, \citeauthor{danlos-ilimp-taln2005} va avoir recours à des heuristiques établies à partir d'études quantitatives ou de ses intuitions linguistiques. Par exemple, pour une construction donnée, si on analyse plus fréquemment les phrases comme impersonnelles dans les corpus, alors cette construction sera considéré comme telle.
+Pour éviter d'avoir trop de constructions considérées comme \og ambiguës \fg{}, \citeauthor{danlos-ilimp-taln2005} va avoir recours à des heuristiques établies à partir d'études quantitatives ou de ses intuitions linguistiques. Par exemple, pour une construction donnée, si on analyse plus fréquemment les phrases comme impersonnelles dans les corpus, alors cette construction sera par la suite considérée comme telle.
 
 \paragraph*{}
 Afin de les incorporer à ILIMP, ces règles sont traduites en patrons linguistiques grâce à l'outil UNITEX\footnote{http://www-igm.univ-mlv.fr/~unitex/\#}. Par exemple, une construction typiquement impersonnelle est le verbe \og \textit{être} \fg{} à la 3ème personne du singulier, suivi d'un adjectif du lexique préalablement défini (il est ici la tête lexicale), suivi de la proposition \og \textit{de} \fg{} et d'un verbe à l'infinitif, on écrit alors le patron suivant :
@@ -126,9 +124,7 @@ Ce patron correspond ainsi à des phrases comme :
 
 \og{}\textit{Il est difficile de résoudre ce problème.}\fg{}
 
-\paragraph{}
-UNITEX prend en entrée des données brutes, et les prétraite en effectuant une tokénisation, et en attribuant à chaque token toutes les propriétés morpho-syntaxiques et flexionnelles que celui-ci peut avoir (obtenues grâce au dictionnaire DELAF).
-%TODO : ref.
+UNITEX prend en entrée des données brutes, et les prétraite en effectuant une tokénisation, et en attribuant à chaque token toutes les propriétés morpho-syntaxiques et flexionnelles que celui-ci peut avoir (obtenues grâce au dictionnaire DELAF \citet{courtois}).
 
 Les données prétraitées et les patrons écrits, il s'agit maintenant de décorer chaque occurrence de \og \textit{il} \fg{} de la balise adéquate, à savoir \verb![IMP]! (impersonnelle),  \verb![ANA]! (anaphorique) ou \verb![AMB]! (ambiguë).
 
@@ -136,60 +132,45 @@ Pour ce faire, toutes les occurrences de \og \textit{il} \fg{} reçoivent par d�
 
 \paragraph*{}
 Pour évaluer ILIMP, le corpus utilisé est \emph{Le Monde}, comportant 3 782 613 tokens, dont 13 611 occurrences de \og{}\textit{il}\fg{}, celles-ci ayant été annotées à la main. Il ressort de cette évaluation un taux de précision de 97.5\%. La plupart des erreurs obtenues sont des balises \verb![ANA]! à la place de \verb![IMP]! car \verb![ANA]! est la balise par défaut, et les règles utilisées n'ont pas couvert tous les cas. Par exemple, l'inversion du sujet n'a pas été correctement traitée, le lexique des adjectifs impersonnels est incomplet ou encore l'impasse a été faite sur la coordination.
-
-
- Il y a peu d'erreurs \verb![IMP]! à la place de \verb![ANA]! malgré les heuristiques brutales.
- 
- Pour finir, un étiquetage morpho-syntaxique aurait pu éviter certaines erreurs de prédiction.
-
-%TODO footnote multiple : Exemples tirés de l'article de Danlos 2005.
-
-%\paragraph{}
-%L'approche à base de règles développée pour le français est l'outil ILIMP, conçu pour classer les occurrences du pronom \og{}\textit{il}\fg{} selon si elles sont anaphoriques ou impersonnelles \citep{danlos-ilimp-taln2005}. Cet outil travaille sur des textes bruts, non annotés.
-%La démarche est la suivante : dans un premier temps, on observe des constructions de phrases particulières qui permettent d'établir des patrons (en partant du principe que les entités lexicales employées avec le \og{}\textit{il}\fg{} sont déterminantes). Ces patrons sont écrits grâce à l'outil UNITEX (effectuant une tokénisation, un étiquetage morpho-syntaxique ainsi que des traits flexionnels).
-%
-%Les règles établies permettent de trouver toutes les occurrences de \og{}\textit{il}\fg{} impersonnelles, et vont les décorer de la balise [IMP] (la balise [ANA] étant définie par défaut).
-%Il se trouve que pour chaque phrase, le contexte gauche, même s'il est complexe, est analysable sans trop de difficultés ; c'est le contexte droit qui peut poser des ambiguïtés. Par exemple, deux constructions peuvent différer de façon très subtile : \og \textit{Il manque du poivre (dans cette maison)} \fg{}/\og \textit{Il manque de poivre, ce rôti} \fg{} (ici la première construction est impersonnelle et la seconde anaphorique alors qu'elles se distinguent seulement par \textit{du}/\textit{de}) ou encore des constructions comme \og \textit{Il est certain que Fred viendra} \fg{}  qui peuvent être à la fois impersonnelles et anaphoriques. 
-%Pour les cas ambigus, on a recours à une balise [AMB], mais dans l'optique de l'utiliser le moins possible, l'outil va tenter de déterminer si le pronom est impersonnel à l'aide d'heuristiques basées sur les fréquences.
-%
-%Pour évaluer ILIMP, le corpus utilisé est \emph{Le Monde}, comportant 3.782.613 tokens, dont 13.611 occurrences de \og{}\textit{il}\fg{}, celles-ci ayant été annotées à la main. Il ressort de cette évaluation un taux de précision de 97.5\%. La plupart des erreurs obtenues sont des balises [ANA] à la place de [IMP] car [ANA] est la balise par défaut, et les règles utilisées n'ont pas couvert tous les cas. Il y a peu d'erreurs [IMP] à la place de [ANA] malgré les heuristiques brutales.
-%Par ailleurs, les résultats sont meilleurs sur un corpus journalistique que littéraire.
-
+Il y a peu d'erreurs \verb![IMP]! à la place de \verb![ANA]! malgré les heuristiques brutales.
+Un étiquetage morpho-syntaxique aurait pu éviter certaines erreurs de prédiction.
 
 \paragraph{}
 L'approche pour l'anglais proposée par \citet{Bergsma-11}, va allier l'apprentissage automatique supervisé et des observations statistiques.
-Ce système \textit{NADA : Non-Anaphoric Detection Algorithm} prend en entrée des données tokénisées et détecte les occurences de \og{}\textit{it}\fg{} non-coréférentielles. Les données en question n'ont pas été analysées morpho-syntaxiquement, car le postulat est fait que l'ambiguïté repose sur la présence d'entités lexicales spécifiques, et non sur les informations morpho-syntaxiques.
-Par exemple :
+Ce système (\textit{NADA : Non-Anaphoric Detection Algorithm}) prend en entrée des données tokénisées et détecte les occurences de \og{}\textit{it}\fg{} non-coréférentielles. Les données en question n'ont pas été analysées morpho-syntaxiquement, car le postulat est fait que l'ambiguïté repose sur la présence d'entités lexicales spécifiques, et non sur les informations morpho-syntaxiques.
+Par exemple\footnote{Les exemples mentionnés sont tirés de l'article \textit{NADA : A robust system for non-referential pronoun detection} par \citet{Bergsma-11}} :
 
 \og{} \textit{It is \textbf{able} to maintain a stable price.} \fg{}
 
 \og{} \textit{It is \textbf{important} to maintain a stable price.} \fg{}
-%\setcitestyle{numbers,square}
+\setcitestyle{numbers,square}\\
+sont composés de la même séquence d'étiquettes syntaxiques, seul l'adjectif les différencie : \textit{able}/\textit{important}.
 
 Deux types de traits sont alors apportés au classifieur : des traits lexicaux-syntaxiques, mais aussi des statistiques tirées du corpus n-gramme de Google \citep{google-ngram}. Le classifieur est fondé sur un modèle de régression. Les traits lexicaux sont extraits sur la phrase entière. Il y a par exemple la présence d'autres formes du pronom personnel (\textit{its}/\textit{itself}), la présence d'acronymes, de prépositions juste avant le nom, de certains tokens prédéfinis tels \og{}\textit{that}\fg{} ou \og{}\textit{says}\fg{} après le pronom, etc.
 Les traits statistiques sont établis grâce à l'énorme banque de données fournie par Google. En effet, pour chaque 4-gramme contenant le pronom \og{}\textit{it}\fg{}, on va établir un patron (le \og{}\textit{it}\fg{} est remplacé par un \og{}\textit{\_}\fg{}) et observer dans les données si d'autres mots remplissent ce patron, ou si seulement le cas de figure avec \og{}\textit{it}\fg{} a été rencontré. Par exemple, si on extrait \og{}\textit{it is able to}\fg{}, on va rechercher toutes les occurences de la forme \og{}\textit{\_ is able to}\fg{}.
 Les résultats obtenus permettent d'ajouter un trait (un poids) dans le classifieur.
 Seulement, ce corpus étant gigantesque, il a fallu le compresser au maximum. Pour ce faire, diverses techniques ont été utilisées : ne récupérer que les 4-grammes, uniquement ceux contenant \og{}\textit{it}\fg{}, \og{}\textit{they}\fg{} ou \og{}\textit{them}\fg{}, tronquer les mots à 4 caractères, les encoder, ne retenir que les changements d'un 4-gramme à l'autre, etc.
 
-NADA a été évalué sur les corpus BBN\cite{BBN}, WSJ-2 (tiré du Penn Treebank\cite{Marcus-1993-BLA-972470.972475}) et ItBank\cite{Bergsma08distributionalidentification}. Les résultats sont similaires pour les 3 corpus (entre 85,1\% et 86,2\%). Par comparaison, l'évaluation a aussi été réalisée avec seulement les traits lexicaux et seulement les traits statistiques, obtenant de moins bons résultats indépendamment (en moyenne 80\% pour les traits lexicaux et 83,5\% pour les traits statistiques).
+%TODO : ref corpus plus jolies
+NADA a été évalué sur les corpus BBN \cite{BBN}, WSJ-2 (tiré du Penn Treebank \cite{Marcus-1993-BLA-972470.972475}) et ItBank \cite{Bergsma08distributionalidentification}. Les résultats sont similaires pour les 3 corpus (entre 85,1\% et 86,2\%). Par comparaison, l'évaluation a aussi été réalisée avec seulement les traits lexicaux et seulement les traits statistiques, obtenant de moins bons résultats indépendamment (en moyenne 80\% pour les traits lexicaux et 83,5\% pour les traits statistiques).
 
-%\setcitestyle{authoryear,round}
+Les approches par classification obtiennent à l'heure actuelle les meilleurs résultats pour le cas du pronom \og \textit{it} \fg{} anglais, c'est pourquoi nous cherchons à les adapter aux textes français.
+\setcitestyle{authoryear,round}
 
 \section{Corpus de travail}
 \label{corpus}
 
-Nous avons effectué nos expérimentations sur une partie du corpus annoté par \citet{tutin-hal-00373327}.
-Cette ressource, initialement composée d'un million de mots, annote une grande partie des expressions anaphoriques, même si certaines sont rejetées car trop complexes. Les expressions retenues appartiennent à des classes fermées, telles les pronoms personnels, les déterminants possessifs, les pronoms démonstratifs,\ldots
+Nous avons à disposition pour nos expérimentations le corpus annoté par \citet{tutin-hal-00373327}.
+Cette ressource, composée d'un million de mots, annote une grande partie des expressions anaphoriques, même si certaines sont rejetées car trop complexes. Les expressions retenues appartiennent à des classes fermées, telles les pronoms personnels, les déterminants possessifs, les pronoms démonstratifs,\ldots
 L'annotation permet d'indiquer les éléments mis en jeu ainsi que la relation entre l'expression anaphorique et son(ses) antécédent(s). Cette relation peut appartenir à l'une des 5 classes suivantes : coréférence, membre de, description, phrase ou indéfinie.
 
 L'annotation a été faite à la main par deux linguistes (le processus n'est pas exclusivement manuel puisque les expressions sont pré-annotées automatiquement et des outils d'édition sont utilisés pour simplifier la tâche), au format XML. Afin de mesurer la fiabilité de l'annotation, une évaluation sur 5\% du corpus a été effectuée.
 
 \paragraph{}
-Afin de mettre en place une chaîne de traitement, nous travaillons sur la portion du corpus contenant les articles du journal \emph{Le Monde} (rubrique économie). Cette portion contient 202 091 mots. Ceci nous permet d'établir rapidement notre processus d'extraction de traits.
+Nous travaillons sur la portion du corpus contenant les articles du journal \emph{Le Monde} (rubrique économie). Cette portion contient 202 091 mots. Ceci nous permet d'établir rapidement notre processus d'extraction de traits.
 
-\paragraph{}
+
 Nous transformons cette portion en un corpus au format BIO. Ce format permet d'étiqueter les tokens selon qu'ils débutent (Beginning of -- \verb!B!), sont à l'intérieur (Inside of -- \verb!I!), ou sont hors (Outside -- \verb!O!) de la zone d'intérêt.
-
 Pour cela, on ne garde que les balises associées aux pronoms \og \textit{il} \fg{}, et on les convertit en étiquettes \verb!B-ANA! (début d'une entité de \og \textit{il} \fg{} anaphorique). On considère ensuite tous les \og \textit{il} \fg{} non annotés comme impersonnels, et on les décore de l'étiquette \verb!B-IMP!. Toutes les autres entités qui ne sont pas des \og \textit{il} \fg{} sont annotées \verb!O! puisqu'elles ne nous intéressent pas.
 \label{annotation-imp}
 
@@ -199,12 +180,10 @@ On obtient par exemple :
 
 \textit{Il\verb![B-IMP]! y\verb![O]! a\verb![O]! même\verb![O]! des\verb![O]! rats\verb![O]! à\verb![O]! proximité\verb![O]! .}
 
-Nous disposons à ce stade d'un corpus contenant 1176 occurrences du pronom \og \textit{il} \fg{}, dont 537 sont anaphoriques, et 631 impersonnelles.
+Nous disposons à ce stade d'un corpus contenant 1176 occurrences du pronom \og \textit{il} \fg{}, dont 537 sont anaphoriques, et 631 impersonnelles. Il est intéressant de remarquer que nos données contiennent plus de constructions impersonnelles qu'anaphoriques. Pour le texte anglais, des études \citep{gundel} ont reporté entre 16\% et 50\% de cas impersonnels. Nous nous attendons à une tendance similaire en français (\citeauthor{danlos-ilimp-taln2005} recense 42\% de cas impersonnels pour les articles du corpus \textit{Le Monde 1994}, toutes rubriques confondues), nous avons donc affaire à un corpus particulièrement fourni en formes impersonnelles. Ceci s'explique par le fait qu'il soit journalistique, et qu'il traite d'économie.
 
 \paragraph{}
-Nous divisons ensuite ce corpus en 3 parties. Un dixième constitue le corpus de développement, un autre dixième celui de test, et tout le reste est consacré à l'entraînement de l'étiqueteur de séquences syntaxiques.
-
-
+Nous divisons ce corpus en 3 parties. Un dixième constitue le corpus de développement, un autre dixième celui de test, et tout le reste est consacré à l'entraînement de l'étiqueteur de séquences.
 C'est sur cette dernière partie que nous travaillons ensuite.
 Le corpus de test demeure quant-à lui inchangé et non consulté durant toute cette phase de tests, puisque nous réservons son usage à de futurs travaux.
 
@@ -213,86 +192,31 @@ Le corpus de test demeure quant-à lui inchangé et non consulté durant toute c
 
 D'après \citeauthor{danlos-ilimp-taln2005}, les constructions impersonnelles reposent sur des conditions tant lexicales que syntaxiques. Pour les propriétés syntaxiques, des traits peuvent \^etre obtenus grâce à un simple étiquetage morpho-syntaxique, et une observation de ces étiquettes pour les tokens entourant l'occurrence de \og \textit{il} \fg{}. Afin d'extraire les informations lexicales, nous avons fait appel à une heuristique naïve : nous cherchons à décrire la tête lexicale en observant le premier verbe, adjectif ou adverbe suivant l'occurrence de \og \textit{il} \fg{}, en effet l'un d'entre eux constitue cette tête lexicale.
 
-Lors de nos expériences, nous observons simplement la forme de surface de ces éléments. En l'état de notre avancement, nous n'avons pas implémenté de lexiques recensant les verbes, expressions ou adjectifs particuliers à chaque type de construction. Il est en effet intéressant de déduire de la tête lexicale des traits tels que l'appartenance au vocabulaire des verbes météorologiques, à celui des verbes de discours, etc.
+Lors de nos expériences, nous observons simplement la forme de surface de ces éléments. En l'état de notre avancement, nous n'avons pas implémenté de lexiques recensant les verbes, expressions ou adjectifs particuliers à chaque type de construction. Il peut en effet être intéressant de déduire de la tête lexicale des traits tels que l'appartenance au vocabulaire des verbes météorologiques, à celui des verbes de discours, etc.
 Nous observons également les combinaisons telles que le premier verbe + la première proposition qui suit le pronom étudié, pour détecter des constructions comme \og \textit{il arrive que} \fg{}. Nous n'observons ces traits qu'au sein de la phrase, à l'instar des travaux de \citeauthor{Bergsma-11} (ceux-ci ont en effet comparé les résultats d'annotation du caractère anaphorique du pronom \og{}\textit{it}\fg{} chez un individu disposant d'une fenêtre de 8 tokens puis disposant de la phrase entière ; il obtient un taux d'exactitude de 85\% dans le premier cas, contre 95\% dans le second).
 
 La présence de certains éléments particuliers peut aussi caractériser des constructions anaphoriques : le pronom \og \textit{lui} \fg{}, les déterminants possessifs à la 3\up{ème} personne du singulier, d'autres occurrences de \og \textit{il} \fg{}, etc. La présence d'acronymes ou de noms propres peut quant à elle suggérer l'existence d'un antécédent, donc le caractère anaphorique du pronom (nous n'implémentons pas ces deux éléments lors de nos expériences, car ils nécessitent une reconnaissance préalable des entités nommées).
-
-%TODO : à virer
-%Nos données mises en place, nous cherchons maintenant à recenser les traits pouvant être utiles à notre tâche.
-%
-%\paragraph{}
-%Notre première expérience consiste à tester les traits classiques utilisés pour la reconnaissance de chunks. Les chunks sont des unités lexicales qui définissent la structure syntaxique superficielle des phrases (groupes nominaux, groupes verbaux, etc.). Nous nous sommes appuyés sur le travail d'Isabelle Tellier qui a mis en place un chunker à l'aide des CRF et de Wapiti\cite{constant-integrer-taln11}. Ces traits permettent d'observer le contexte local des occurrences à savoir : les formes de surface et étiquettes morpho-syntaxiques dans une fenêtre de 5 tokens (unigrammes et bigrammes), les préfixes et suffixes entre 1 et 4 caractères, la présence de majuscules, de ponctuation ou de chiffres dans une fenêtre de 3 tokens, si le token étudié est composé uniquement de majuscules/ponctuation/chiffres et enfin s'il commence par une majuscule.
-%
-%\paragraph{}
-%Pour notre seconde expérience, nous apportons nos propres traits au sequence labeler. Ceux-ci proviennent de la littérature ainsi que de l'observation des données.
-%
-%Nous avons choisi d'extraire certains traits additionnels au sein de la phrase, à l'instar des travaux de S. Bergsma et D. Yarowski. En effet, ceux-ci se sont basés sur les procédés humains : l'expérience consistait à demander à un sujet d'annoter 200 occurrences du \og{}it\fg{} anglais. Celui-ci obtient un taux d'exactitude de 85\% s'il dispose des 4 tokens de chaque côté de l'occurrence, contre 95\% s'il dispose de la phrase entière. Nous faisons l'hypothèse que cette fenêtre est aussi plus judicieuse pour le texte français.
-%
-%\paragraph{}
-%Voici les traits retenus :
-%
-%\paragraph{}
-%\textbullet{} L'observation des formes de surface autour de l'occurrence :
-% \begin{itemize}
-%  \item Premier verbe/préposition/adverbe/adjectif/clitique suivant l'occurrence
-%  \item Premier verbe/préposition/adverbe/adjectif/conjonction précédent l'occurrence
-%  \item Première combinaison du type verbe+préposition suivant l'occurrence
-%  \item Signes de ponctuation
-% \end{itemize}
-% 
-%\paragraph{}
-%\textbullet{} La présence ou non de certains tokens (booléens) :
-% \begin{itemize}
-%  \item Présence de déterminant possessif à la 3ème personne du singulier (ses, son, sa, ...)
-%  \item Présence d'un acronyme
-%  \item Présence du pronom \og{}lui\fg{}
-%  \item Présence d'une autre occurrence de \og{}il\fg{}
-% \end{itemize}
-% 
-%\paragraph{}
-%\textbullet{} Les statistiques sur la phrase (entiers) :
-% \begin{itemize}
-%  \item Taille de la phrase
-%  \item Nombre de \og{}il\fg{} dans la phrase
-% \end{itemize}
-%
-%\paragraph{}
-%\textbullet{} Certains patrons fréquents (booléens) :
-% \begin{itemize}
-%  \item verbes météorologiques (pleuvoir, neiger,\ldots)
-%  \item autres verbes impersonnels (advenir, s'agir,\ldots) 
-%  \item structures impersonnelles de temps (il est temps de/que, il est l'heure de/que)
-%  \item patrons fréquents (Il arrive que, il paraît que, \ldots)
-%  \item expressions typiquement impersonnelles (il était une fois, il y a, quoi qu'il en soit,\ldots)
-%  \item verbes déclaratifs (dire, affirmer, \ldots) sauf forme passive
-%  \item verbes de sentiment (admirer, craindre, s'étonner,\ldots)
-%  \item verbes de volonté (vouloir, exiger,\ldots) sauf forme passive
-%  \item verbes d'opinion (croire, imaginer, penser, \ldots)
-% \end{itemize}
-%
-%\paragraph{}
-%De plus, pour observer le contexte local, les traits classiques pour la reconnaissance de chunks utilisent une fenêtre de 5 tokens (2 avant et 2 après). Nous avons donc envisagé d'élargir celle-ci à 5 tokens avant et après, et de prendre en compte les trigrammes au sein de cette nouvelle fenêtre.
-
-% \paragraph{}
-% Ces traits permettent de décrire chaque occurence de \og{}\textit{il}\fg{} au sein du corpus. Nous y ajoutons un dernier type de trait, provenant de l'observation de données extérieures, en l'occurence du corpus Ngram Google :
-% 
-% \begin{itemize}
-%  \item[\textbullet] Statistiques sur le corpus Ngram (réels)
-% \end{itemize}
-% 
-% En effet, on va regarder tous les 4-grammes contenant l'occurence de \og{}\textit{il}\fg{}, puis établir un patron pour chacun, en enlevant le \og{}\textit{il}\fg{}. On va ensuite chercher dans les données Google tous les 4-grammes correspondant à ce patron. Le résultat obtenu, à savoir la proportion de \og{}\textit{il}\fg{} trouvés, va nous donner un trait à incorporer au classifieur. En effet, si on ne trouve ce patron qu'en présence d'un \og{}\textit{il}\fg{} ou en tout cas en grande majorité, il y a de fortes chances que le \og{}\textit{il}\fg{} soit non co-référentiel. Si au contraire on trouve un bon nombre de 4-grammes avec des \og{}\textit{elle}\fg{} ou des noms propres à la place du \og{}\textit{il}\fg{}, il y a de plus grandes chances que l'occurence soit co-référentielle, car remplaçable.
 
 
 \section{Cadre expérimental}
 \label{xp}
 
-Nous avons opté pour une expérimentation par étiquetage de séquences. En apprentissage automatique, ce type de tâche consiste à assigner une étiquette à chaque élément d'une séquence, compte tenu du contexte proche.
+Nous avons opté pour une expérimentation par étiquetage de séquences. En apprentissage automatique, ce type de tâche consiste à assigner une étiquette à chaque élément d'une séquence, compte tenu du contexte proche. Ici, nos séquences ne sont constituées que d'un seul élément : le pronom \og \textit{il} \fg{}. Comme expliqué précédemment, nous nous sommes malgré tout intéressés à cette approche, dans l'optique d'étendre ces travaux à la détermination du caractère anaphorique des descriptions définies, qui sont quant à elles des séquences plus longues. 
 
-Nous utilisons pour cela l'outil Wapiti\footnote{http://wapiti.limsi.fr} proposé par \citet{lavergne2010practical}, implémentant les algorithmes de CRF (\textit{Conditional Random Fields}) linéaires.
-
+Nous utilisons l'outil Wapiti\footnote{http://wapiti.limsi.fr} proposé par \citet{lavergne2010practical}, implémentant les algorithmes de CRF (\textit{Conditional Random Fields}) linéaires.
 Le principe du modèle CRF appliqué à l'étiquetage de séquences est le suivant : on observe dans un premier temps des comportements similaires dans le voisinage de l'élément, puis on apprend à l'aide de probabilités distributionnelles les répétitions de contextes locaux, afin d'obtenir des \og règles \fg{}. Celles-ci permettent ensuite de prédire les étiquettes de nouveaux éléments.
 
+\subsection{Approche de base}
+
+L'approche de base la plus naïve consiste à étiqueter toutes les occurrences de \og \textit{il} \fg{}  selon la classe majoritaire, ici \verb!IMP!.
+Le taux d'occurrences correctement classées est donc de 53,66\%. Ce sont ces résultats que nous tentons d'améliorer à travers nos expériences.
+
+\subsection{Présentation des expériences}
+
+Notre première expérience consiste à tester les traits classiques utilisés pour la reconnaissance de segments syntaxiques (\textit{chunks}). Les \textit{chunks} sont des unités lexicales qui définissent la structure syntaxique superficielle des phrases (groupes nominaux, groupes verbaux, etc.). Reconnaître ces segments consiste donc à analyser syntaxiquement les textes puis les découper en groupes de mots, tout en identifiant leur nature syntaxique. Nous nous sommes appuyés sur les travaux de \citet{constant-integrer-taln11} qui ont mis en place un segmenteur syntaxique à l'aide de Wapiti. 
+Ces traits permettent d'observer le contexte local des occurrences à savoir : les formes de surface et étiquettes morpho-syntaxiques dans une fenêtre de 5 tokens (unigrammes et bigrammes), les préfixes et suffixes entre 1 et 4 caractères, la présence de majuscules, de ponctuation ou de chiffres dans une fenêtre de 3 tokens, si le token étudié est composé uniquement de majuscules/ponctuation/chiffres et enfin s'il commence par une majuscule.
+
+Pour notre seconde expérience, nous apportons les traits mentionnés dans la section \ref{approche-traits} à l'étiqueteur de séquences. Ceux-ci proviennent de la littérature ainsi que de l'observation des données.
 
 \subsection{Description du système}
 
@@ -303,33 +227,34 @@ Nous prétraitons en premier lieu les données avec les analyseurs Apache OpenNL
 Ce prétraitement nous permet d'obtenir les étiquettes morpho-syntaxiques ainsi que les traits flexionnels.
 Puis, à l'aide de scripts Bash, nous mettons en place nos fichiers tabulés contenant les informations nécessaires à notre deuxième série d'expériences, à savoir la taille de la phrase, le nombre d'occurrences de \og il \fg{} dans celle-ci, etc.
 
-Au final, notre fichier tabulé contient les colonnes suivantes : la forme de surface de chaque token, son étiquette morpho-syntaxique, ses traits flexionnels, la taille de la phrase, le nombre d'occurrences de \og il \fg{} dans celle-ci, idem pour \og lui \fg{} ainsi que les possessifs à la 3ème personne du singulier, les verbes, prépositions, adjectifs, adverbes, conjonctions et clitiques précédent ou suivant le token, et pour finir l'étiquette BIO représentant la classe (\verb!O!, \verb!ANA! ou \verb!IMP!).
+Au final, notre fichier tabulé contient les colonnes suivantes : la forme de surface de chaque token, son étiquette morpho-syntaxique, ses traits flexionnels, la taille de la phrase, le nombre d'occurrences de \og il \fg{} dans celle-ci, idem pour \og lui \fg{} ainsi que les possessifs à la 3ème personne du singulier, le premier verbe, préposition, adjectif, adverbe, conjonction et clitique précédent ou suivant le token, et pour finir l'étiquette BIO représentant la classe (\verb!O!, \verb!ANA! ou \verb!IMP!).
 
 \paragraph{}
-Wapiti requiert un fichier de patrons, permettant d'extraire les traits à partir de notre fichier tabulé. Nous utilisons dans un premier temps le fichier \emph{chpattern.txt}, disponible dans la distribution de Wapiti, auquel nous ajoutons par la suite nos propres patrons.
+Wapiti requiert un fichier de patrons, permettant d'extraire les traits à partir de notre fichier tabulé. Nous utilisons dans un premier temps le fichier \emph{chpattern.txt}, disponible dans la distribution de Wapiti. Il permet d'extraire les traits classiques de la détection de segments syntaxiques, à savoir les traits de notre première expérience. Nous y ajoutons par la suite nos propres patrons nécessaires à la seconde expérience.
 
-\paragraph{}
-A partir de ces traits, nous pouvons dorénavant entraîner notre modèle.
-
-
-\subsection{Approche de base}
-
-L'approche de base la plus naïve consiste à étiqueter toutes les occurrences de \og \textit{il} \fg{}  selon la classe majoritaire, ici \verb!IMP!.
-Le taux d'occurrences correctement classées est donc de 53,66\%.
 
 \subsection{Evaluation}
 
 Nous évaluons le système obtenu par validation croisée avec 10 partitions. Comme dit précédemment, à ce stade de notre travail nous évaluons uniquement sur le corpus d'entraînement.
 
-Les mesures utilisées sont le taux d'occurrences correctement classées (exactitude) et pour chaque classe : la précision, le rappel et la F-mesure.
+Les mesures utilisées sont le taux d'occurrences correctement classées (exactitude) et pour chaque classe : la précision (\ref{Precision}), le rappel (\ref{Rappel}) et la F-mesure (\ref{Fmesure}).
 
-Par exemple, pour la classe \verb!B-coref!, les mesures sont données par les formules suivantes :
+Par exemple, pour la classe \verb!ANA!, les mesures sont données par les formules suivantes :
 
-\[ Precision = \frac{Nombre\ d'occurences\ correctement\ classees\ COREF}{Nombre\ d'occurences\ classees\ COREF} \]
+\begin{equation}
+\label{Precision}
+Precision = \frac{Nombre\ d'occurences\ correctement\ classees\ ANA}{Nombre\ d'occurences\ classees\ ANA}
+\end{equation}
 
-\[ Rappel = \frac{Nombre\ d'occurences\ classees\ COREF}{Nombre\ d'occurences\ annotees\ comme\ referentielles} \]
+\begin{equation}
+\label{Rappel}
+Rappel = \frac{Nombre\ d'occurences\ classees\ ANA}{Nombre\ d'occurences\ annotees\ comme\ anaphoriques}
+\end{equation}
 
-\[ F\-mesure = \frac{2 * (Precision * Rappel)}{(Precision + Rappel)} \]
+\begin{equation}
+\label{Fmesure}
+F\-mesure = \frac{2 * (Precision * Rappel)}{(Precision + Rappel)}
+\end{equation}
 
 
 \section{Résultats et discussion}
@@ -338,10 +263,10 @@ Par exemple, pour la classe \verb!B-coref!, les mesures sont données par les fo
 Nous détaillons à présent les résultats obtenus lors de nos expérimentations.
 
 \paragraph{}
-\textbf{Expérience avec les traits classiques de reconnaissance des chunks :}
+\textbf{Expérience avec les traits classiques de reconnaissance des segments syntaxiques :}
 
 \begin{tabular}[H]{l|lll|lll}
-& \multicolumn{3}{c|}{B-coref} & \multicolumn{3}{c}{B-non-coref}\\
+& \multicolumn{3}{c|}{ANA} & \multicolumn{3}{c}{IMP}\\
 Exactitude & Précision & Rappel & F-mesure & Précision & Rappel & F-mesure\\
 \hline
 0,79 & 0,78 & 0,76 & 0,77 & 0,81 & 0,83 & 0,82\\
@@ -349,13 +274,13 @@ Exactitude & Précision & Rappel & F-mesure & Précision & Rappel & F-mesure\\
 \end{tabular}
 
 \paragraph{}
-On constate que l'observation du contexte proche suffit à obtenir des résultats satisfaisants, avec 82\% d'occurrences correctement classées.
+On constate que l'observation du contexte proche suffit à obtenir des résultats satisfaisants, avec 82\% d'occurrences correctement classées. Ainsi, sans même s'intéresser à la nature des constructions impersonnelles et anaphoriques, la simple observation des formes de surfaces et étiquettes morpho-syntaxiques dans une fenêtre de 5 tokens autour du pronom \textit{il} permet de déterminer son caractère dans une grande partie des cas.
 
 \paragraph{}
 \textbf{Série d'expériences avec incorporation de nouveaux traits :}
 
 \begin{tabular}[H]{l|lll|lll}
-& \multicolumn{3}{c|}{B-coref} & \multicolumn{3}{c}{B-non-coref}\\
+& \multicolumn{3}{c|}{ANA} & \multicolumn{3}{c}{IMP}\\
 Exactitude & Précision & Rappel & F-mesure & Précision & Rappel & F-mesure\\
 \hline
 0,8 & 0.79 & 0.77 & 0.78 & 0.81 & 0.83 & 0.83\\
@@ -365,15 +290,13 @@ Exactitude & Précision & Rappel & F-mesure & Précision & Rappel & F-mesure\\
 \paragraph{}
 Les traits ajoutés n'ont pas été concluants : ils n'améliorent presque pas les scores obtenus avec une simple observation du contexte local. Testés séparément, aucun d'entre eux n'améliore les résultats. Pour certaines portions, on constate une légère amélioration des scores avec le nombre de pronoms \og \textit{il} \fg{} dans la phrase ainsi que les formes de surface du verbe et de la préposition suivant l'occurrence, mais cette tendance n'est pas vérifiée lors de l'évaluation globale.
 
-Ceci s'explique par une heuristique trop naïve pour détecter la tête lexicale. En effet, observer le premier verbe suivant le pronom, ou bien le premier adjectif par exemple, ne permet pas de prendre en compte un contexte gauche complexe. Il serait donc intéressant dans un premier temps de déterminer correctement la tête lexicale, pour pouvoir en inférer correctement des traits pertinents, tels que la préposition suivante, l'appartenance à un lexique prédéfini, etc.
+Ceci s'explique par une heuristique trop naïve pour détecter la tête lexicale. En effet, observer le premier verbe suivant le pronom, ou bien le premier adjectif par exemple, ne permet pas de prendre en compte un contexte gauche complexe. Il serait donc intéressant dans un premier temps de déterminer correctement la tête lexicale, pour pouvoir en inférer des traits pertinents, tels que la préposition suivante, l'appartenance à un lexique prédéfini, etc.
 
 \paragraph{}
-De plus, seule l'approche par étiquetage de séquence à été abordée à travers nos expériences. Il serait judicieux de tester avant tout la résolution de ce problème en tant que tâche de classification simple. Comme expliqué dans l'introduction, nous avons opté pour l'étiquetage de séquences car ces expériences faisaient écho à d'autres travaux, mais ce n'est pas pour autant qu'il faille rejeter l'approche par classification.
+De plus, seule l'approche par étiquetage de séquence à été abordée à travers nos expériences. Il serait judicieux de tester avant tout la résolution de ce problème en tant que tâche de classification simple. Comme expliqué dans l'introduction, nous avons opté pour l'étiquetage de séquences car ces expériences faisaient écho à d'autres travaux, mais ce n'est pas pour autant qu'il faille rejeter l'approche par classification simple.
 
-\paragraph{}
 On peut aussi noter que la totalité du corpus n'a pas été exploitée. En effet, nous n'avons travaillé que sur les articles du Monde, ce qui représente un cinquième du corpus Tutin et al. Cette portion ne semble d'ailleurs pas représentative en ce qui concerne la proportion de pronoms \og \textit{il} \fg{} impersonnels. 
 
-\paragraph{}
 Il pourrait aussi être intéressant de se servir de statistiques extrinsèques au corpus, au même titre que les travaux de \citeauthor{Bergsma-11} sur la langue anglaise. Effectivement, il existe un corpus Ngramme fourni par Google, en français.
 
 
@@ -381,11 +304,11 @@ Il pourrait aussi être intéressant de se servir de statistiques extrinsèques 
 
 Cette étude s'est focalisée sur la détermination du caractère co-référentiel des occurrences du pronom \og il \fg{}. Les seuls travaux à notre connaissance existants pour le français utilisant un système à base de règles, nous avons ici opté pour un système d'apprentissage automatique supervisé.
 
-A travers cet article, nous avons décrit les expériences réalisées avec un étiqueteur de séquences syntaxiques. Dans un premier temps, nous avons utilisé les traits classiques employés pour de la recherche d'entités lexicales. Ces traits observent le contexte local, et donnent des résultats plutôt satisfaisants.
+A travers cet article, nous avons décrit les expériences réalisées avec un étiqueteur de séquences. Dans un premier temps, nous avons utilisé les traits classiques employés pour de la recherche d'entités lexicales. Ces traits observent le contexte local, et donnent des résultats plutôt satisfaisants.
 
 Nous avons ensuite apporté nos propres traits, tirés de la littérature ainsi que de l'observation de notre corpus de développement, m\^eme si tous n'ont pas été implémentés. Les résultats ne s'améliorent pas particulièrement avec ces traits.
 
-Il sera donc intéressant pour la suite de tester les autres traits envisagés, ainsi que d'aborder cette tâche comme une tâche de classification.
+Il sera donc intéressant pour la suite d'améliorer l'implémentation des traits, notamment pour la recherche de tête lexicale, de tester les autres traits envisagés, ainsi que d'aborder cette tâche comme une tâche de classification.
 
 En définitive, les pistes que nous avons exploré nous donnent des résultats relativement encourageants vis-à-vis de l'apprentissage automatique. Certaines pistes restent cependant à approfondir, afin d'obtenir un outil suffisamment performant pour être incorporé dans un système plus vaste de résolution d'anaphores.
 
