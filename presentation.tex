@@ -23,7 +23,7 @@
 
 \title[Mais qui est ce \og \textit{il} \fg{} ?]{Détermination du caractère anaphorique\\ du pronom personnel \og{}\textit{il}\fg{}}
 \subtitle{\textit{Mais qui est ce \og il \fg{} ?}}
-\author{\texorpdfstring{Agathe \textsc{Mollé}\newline\url{agathe.molle@univ-nantes.fr}}{Author}}
+\author{Agathe \textsc{Mollé}}
 \institute{Université de Nantes}
 \date{3 mai 2013}
 %TODO mail + Nicolas Hernandez
@@ -33,6 +33,8 @@
 \begin{frame}
   \titlepage
   \begin{center}
+  \verb!agathe.molle@etu.univ-nantes.fr!
+  \vskip 1cm
   Encadrant : Nicolas \textsc{Hernandez}
   \end{center}
 \end{frame}
@@ -55,38 +57,37 @@ Possède un ou plusieurs antécédent(s).\\
 \end{block}
 Ex : \og \textit{Vendredi, \textbf{M. Edmond Maire} a réuni la presse pour apporter \underline{\textbf{son}} soutien à \underline{\textbf{sa}} fédération des cheminots} \fg{}
 \vskip 1cm
-Problématique : trouver l'antécédent.\\
+\textbf{Problématique :} trouver l'antécédent.\\
 \end{frame}
 
 \begin{frame}{Caractère co-référentiel d'une expression}
 L'une des étapes de la résolution d'anaphore est de déterminer le caractère co-référentiel (anaphorique) d'une expression.
-\vskip 1cm
+\vskip 0.5cm
 Intérêt des pronoms : fréquents et facilement identifiables.
-\end{frame}
-
-\begin{frame}{Objectif}
+\vskip 0.5cm
 On s'intéresse au pronom personnel \og \textit{il} \fg{}.\\
 Celui-ci peut s'avérer :
 \begin{itemize}
   \item anaphorique \og{}\textit{\underline{il} ne pouvait entrer ainsi dans un conflit ouvert}\fg{}
   \item impersonnel \og{}\textit{\underline{il} est temps de mettre un terme à la grève}\fg{}
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Objectif}
+Actuellement :
+\begin{itemize}
+  \item De nombreuses approches traitant du \og \textit{it} \fg{} anglais : à base de règles (Lappin et Leass, 1994) ou bien d'apprentissage automatique (Li et al., 2009 - Bergsma et Yarowski, 2011).\\
+  $\implies$ s'appuient sur la structure syntaxique de l'anglais donc pas aisément portables
+  \item A notre connaissance, une seule étude pour le français : à base de règles (Danlos, 2005)
+\end{itemize}
 \vskip 1cm
-Objectif : déterminer le caractère anaphorique du \og \textit{il} \fg{} à l'aide d'apprentissage automatique supervisé.
+\textbf{Objectif :} déterminer le caractère anaphorique du \og \textit{il} \fg{} à l'aide d'apprentissage automatique supervisé.
 \end{frame}
 
 \section{État de l'art}
 
 \begin{frame}{Plan}
   \tableofcontents[currentsection]
-\end{frame}
-
-\begin{frame}{État de l'art}
-\begin{itemize}
-  \item De nombreuses approches traitant du \og \textit{it} \fg{} anglais : à base de règles (Lappin et Leass, 1994) ou bien d'apprentissage automatique (Li et al., 2009 - Bergsma et Yarowski, 2011).\\
-  $\implies$ s'appuient sur la structure syntaxique de l'anglais donc pas aisément portables
-  \item A notre connaissance, une seule étude pour le français : à base de règles (Danlos, 2005)\\
-\end{itemize}
 \end{frame}
 
 \begin{frame}{ILIMP - Danlos 2005}
