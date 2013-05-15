@@ -171,6 +171,39 @@ L'évaluation est mesurée avec la F-mesure cubique et le F-score de MUC. Ils ob
 L'impact des features a ensuité été évalué séparément, et il apparaît que les traits relatifs à l'apposition, au pronom relatif, aux distances et à la prédiction des types d'entités sont ceux qui apportent le plus de résultats.
 L'évaluation a aussi été réalisée sur des données brutes, les têtes étant détectées avec les chunks et les extensions par apprentissage automatique. Le score est alors de 78.24\%.
 
+\paragraph{Résumé Li}
+Tandis que de nombreux systèmes de résolution d'anaphores ignorent le problème des pronoms pléonastiques et choisissent de nettoyer leur données, (ref) considère qu'il est très important de les prendre en compte.
+En effet, on dénombre entre 16\% et 50\% de pronoms impersonnels sur du texte anglais.
+Ils classent le pronom \og it \fg{} selon 4 classes :
+\begin{itemize}
+\item les référentiels avec antécédent nominal
+\item les référentiels avec antécédent phrastique
+\item les pronoms qui n'ont pas d'antécédent (pléonastique) parmi lesquels on peut lister les extrapositions, les cleft (TODO trad) et les local situation (TODO trad)
+\item les pronoms idiomatiques
+\end{itemize}
+(ref) s'intéressent au cas pléonastique (la troisième classe).
+
+Leur système se décompose en 3 phases : le prétraitement, le filtrage syntaxique puis les requêtes sur le web.
+Lors du prétraitement, (ref) construisent un arbre de dépendances. (TODO détailler ?). Pour le filtrage, on cherche à reconnaître une construction météorologique ou temporelle, puis des patrons permettent de filtrer les clefts et les extraposition.
+Enfin, le web est utilisé pour désambiguïser les données restantes. La question peut se poser quant à l'utilisation du web en tant que corpus, étant donné que celui-ci est mal équilibré, souffre de nombreuses erreurs et est difficile à exploiter. Cependant, (ref) affirment qu'il est pertinent par sa taille, et par sa capacité à évoluer dans le temps (nouveaux termes).
+
+TODO : résultats
+
+\paragraph{Résumé BART}
+(ref) ont développé un outil modulaire permettant de mettre en place facilement des systèmes de résolution de coréférence : BART (\textit{Baltimore Anaphora Resolution Toolkit}).
+Il a été conçu afin de faciliter la recherche dans le domaine de la résolution de coréférence, il est ainsi possible de tester séparément différent modèles de prétraitement, de résolution de coréférence mais aussi de traits spécifiques à cette tâche.
+Implémenté en Java, il s'appuie sur le système EMLR développé par Ponzetto et Strubes (ref) et incorpore des idées provenant du système Guitar (Poesio ref), et des travaux de Versley (ref) et Yang et al (ref).
+Cet outil a été testé avec certains modèles existants, notamment les analyseurs ..... (refs, utile de tous les citer ?), ainsi que les modèles proposés par Soon et al. et Yang et al. pour résoudre ce problème de coréférence.
+
+Pour le prétraitement, BART traite des fichiers encodés avec l'annotation MMAX2. Cette annotation, mise en place par (ref) pour l'outil MMAX, permet de décrire des données à l'aide d'XML. Les phrases, mots et tours pour les langages parlés ou les dialogues (un tour correspondant à la même personne qui s'exprime) sont délimités. Des balises exprimant des \textit{marqueurs} (\textit{markable}) peuvent s'ajouter à la description du document. Un marqueur est une entité abstraite composée d'un ensemble arbitraire d'éléments provenant des données de base. Un marqueur peut par exemple décrire une mention anaphorique.
+
+Une fois les marqueurs définis, la seconde phase du prétraitement consiste à créer des objets \textit{Mention}, grâce à un module spécifique.
+
+Les extracteurs de traits prennent en entrée des paires d'instances. Chaque extracteur est représenté par une classe, pour faciliter les tests ultérieurs et leur modularité, et va puiser des informations contenues dans les Mentions.
+
+Il est ensuite possible d'entraîner plusieurs classifieurs sur un ensemble de traits donné. C'est la phase d'encodage/décodage.
+
+Même si l'objectif principal de cet outil était de créer une plateforme d'expérimentation, il peut être utilisé simplement comme un résolveur d'anaphores, avec des résultats proches de l'état de l'art sur le texte anglais. Evalué sur les données MUC, différent classifieurs ont été testés et il en ressort une F-mesure entre 60\% et 63\%.
 
 \section{Corpus de travail}
 \label{corpus}
