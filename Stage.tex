@@ -205,6 +205,24 @@ Il est ensuite possible d'entraîner plusieurs classifieurs sur un ensemble de t
 
 Même si l'objectif principal de cet outil était de créer une plateforme d'expérimentation, il peut être utilisé simplement comme un résolveur d'anaphores, avec des résultats proches de l'état de l'art sur le texte anglais. Evalué sur les données MUC, différent classifieurs ont été testés et il en ressort une F-mesure entre 60\% et 63\%.
 
+
+\paragraph{Résumé Soon}
+Les travaux de (ref) se sont portés sur la résolution de la coréférence pour les syntagmes nominaux. En effet, ils ne se réduisent pas aux pronoms ou à certains types d'entité, mais prennent en considération l'ensemble des groupes nominaux. Ils ont employé une approche à base d'apprentissage automatique, qui ne nécessite pas un corpus gigantesque.
+
+Dans un premier temps, ils déterminent tous les markables (todo) à l'aide d'une cha\^ine de traitement linguistique. Ils génèrent ensuite leurs exemples d'entra\^inement (paires de markables, positives ou négatives) sous forme de vecteurs de traits. Gr\^ace à ces exemples, ils peuvent entra\^iner leur classifieur. Pour tester un nouveau document, ils détectent tous les markables, et les paires possibles sont présentées au classifieur.
+
+La ch\^aine de traitement linguistique leur permettant de déterminer des markables à partir de texte brut se décompose en 7 étapes : la tokénisation et la segmentation en phrases, le traitement morphologique, l'étiquetage morpho-syntaxique, l'identification des syntagmes nominaux, la reconnaissance d'entités nommées, l'extraction de groupes nominaux imbriqués, et la détermination de la classe sémantique. Cette cha\^ine a été évaluée et il en ressort 85\% de markables correctement identifiés.
+
+Pour établir leurs vecteurs de traits, (ref) observent la distance entre les deux markables (l'anaphore \textit{j} et l'antécédent potentiel \textit{i}), si \textit{i} est un pronom, si \textit{j} en est un, si ils sont identiques (en excluant l'article ou le pronom démonstratif), si le syntagme nominal est défini ou démonstratif, si leur nombre ou genre est le m\^eme, ainsi que leur classe sémantique (ou du moins si l'une est parente de l'autre), si tous les deux sont des noms propres, si l'un est un alias de l'autre (par exemple un acronyme, ou si deux entités \textit{Personne} ont le m\^eme nom de famille), et enfin si c'est une apposition.
+
+Les exemples d'entra\^inement positifs sont déterminés comme suit : pour une cha\^ine de coréférence donnée, ils prennent les paires de syntagmes nominaux adjacents. Par exemple, pour la cha\^ine A1--A2--A3, les paires positives sont A1--A2 et A2--A3. Dans une paire, le premier groupe nominal est l'antécédent et le second l'anaphore. Pour générer les exemples négatifs, ils cherchent les autres markables se trouvant entre une anaphore et son antécédent. Par exemple, si l'on s'intéresse à la paire positive A1--A2, et que l'on rencontre dans le texte les markables A1, a, b et A2 dans cet ordre-là, on considère que les paires a--A2 et b--A2 sont négatives.
+
+Les exemples d'entra\^inement extraits sous forme de vecteurs de traits, (ref) utilisent l'algorithme C5, un arbre de décision, pour construire leur classifieur.
+
+Pour un nouveau document de test, ils détectent dans un premier temps tous les markables possibles. Chaque markable est considéré comme une anaphore et pour chacun, tous les markables précédents sont considérés comme antécédents possibles (sauf pour le cas des markables imbriqués). Pour chaque paire (antécédent potentiel--anaphore), on établit un vecteur de traits et le classifieur détermine si elle est succeptible d'\^etre positive. Pour une anaphore donnée, c'est le markable positif le plus proche qui est considéré comme antécédent.
+
+Ce modèle a été évalué sur les corpus issus de MUC6 et MUC7 et obtient des F-mesures atteignant les 60\%. Ces résultats sont comparables aux performances obtenues par les approches qui ne sont pas à base d'apprentissage automatique.
+
 \section{Corpus de travail}
 \label{corpus}
 
