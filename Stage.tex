@@ -223,6 +223,17 @@ Pour un nouveau document de test, ils détectent dans un premier temps tous les 
 
 Ce modèle a été évalué sur les corpus issus de MUC6 et MUC7 et obtient des F-mesures atteignant les 60\%. Ces résultats sont comparables aux performances obtenues par les approches qui ne sont pas à base d'apprentissage automatique.
 
+\paragraph{Résumé Candito}
+(ref) ont produit une analyse syntaxique statistique à la fois en constituants et en dépendances pour le Français. Leur technique consiste à s'appuyer sur un analyseur statistique en constituants puis de le convertir en dépendances typées. Ils travaillent sur le French Tree Bank (ref). Celui-ci préconise une annotation en constituants, et Candito va s'en inspirer pour définir son propre schéma d'annotation \textit{deps}. 
+
+Pour convertir un arbre syntagmatique de type \textsc{Ftb} vers leur schéma \textit{deps}, ils vont dans un premier temps marquer automatiquement la tête de chaque constituant, en utilisant une table de propagation des têtes (ref). Cette étape permet de remonter sur chaque n\oe{}ud syntagmatique sa tête lexicale, et permet ensuite d'extraire des dépendances partielles. Une deuxième étape va renseigner de nouvelles dépendances non extraites à la première étape, à l'aide d'heuristiques. Puis une étape manuelle va permettre d'ajouter les dernières dépendances. Cette conversion a été évaluée sur une portion du corpus révisée manuellement et donne une F-mesure de plus de 98\%.
+
+Pour réaliser l'analyse syntaxique automatique, ils adaptent la procédure de conversion. Ils ont par conséquent besoin de produire des données analogues à celles apportées en entrée à cette procédure. Pour cela, il faut pouvoir ajouter les étiquettes fonctionnelles sur les dépendants verbaux. Ils utilisent l'analyseur en constituants de Berkeley (ref). Deux approches sont possibles : une analyse intégrée (apprentissage d'une grammaire dont les symboles intègrent l'information fonctionnelle) qui dégrade les résultats, ou une analyse séquentielle (analyse en constituants dépourvus d'étiquette puis ajout des étiquettes de fonction en utilisant un modèle lexicalisé) qui sera choisie pour la suite.
+
+La tâche d'étiquetage fonctionnel se réduit à un simple problème de classification. Chaque dépendant est représenté par un vecteur de traits qui décrit le dépendant, son contexte, et sa relation au gouverneur. L'apprentissage est réalisé suivant un modèle par maximum d'entropie (log-linéaire). Lors de l'évaluation de cet étiquetage fonctionnel, ils obtiennent une exactitude de 87.9\%.
+
+Une seconde évaluation permet de mesurer les résultats sur la chaîne d'analyse complète et obtient une précision de 86.56\%. Une dernière évaluation leur a permis de tester leur modèle sur le corpus EASy (ref), moyennant une conversion, et donne un résultat de 66\%, comparable aux meilleurs résultats de la campagne d'évaluation EASy (65\%). Cependant, leur modèle est moins performant lors d'un changement de domaine (médical, par exemple).
+
 \section{Corpus de travail}
 \label{corpus}
 
