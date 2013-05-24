@@ -1,0 +1,57 @@
+(
+(S1 (first SENT) )
+(PONCT (last *) )
+(Sint (last VN) (last AP) (last NP) (last PP) (last VPinf)
+(last Ssub) (last VPpart) (last A ADJ ADJWH) (last ADV
+ADVWH) )
+(VPpart (first VPR VPP) (first VN) )
+(SENT (last VN) (last AP) (last NP) (last Srel) (last
+VPpart) (last AdP) (last I) (last Ssub) (last VPinf) (last PP)
+(last ADV ADVWH) )
+(COORD (first CS CC PONCT) )
+(AP (last A ADJ ADJWH) (last ET) (last VPP) (last ADV
+ADVWH) )
+(NP (first NPP PROREL PRO NC PROWH) (first NP)
+(first A ADJ ADJWH) (first AP) (first I) (first VPpart) (first
+ADV ADVWH) (first AdP) (first ET) (first DETWH DET)
+)
+(VPinf (first VN) (first VIMP VPR VS VINF V VPP) )
+(PP (first P) (first P+D) (first NP P+PRO) )
+(Ssub (last VN) (last AP) (last NP) (last PP) (last VPinf)
+(last Ssub) (last VPpart) (last A ADJ ADJWH) (last ADV
+ADVWH) )
+(VN (last VIMP VPR VS VINF V VPP) (last VPinf) )
+(Srel (last VN) (last AP) (last NP) )
+(AdP (last ADV ADVWH) )
+(* (first *) )
+)
+
+
+Djamé Seddah
+Exploring the Spinal-Tig Model for Parsing French
+
+Table 5: Head rule percolation table for the F TB - CC
+adapted from (Dybro-Johansen, 2004) in the Chiang
+(2000) format
+
+
+
+Améliorer un lexique syntaxique
+à l’aide des tables du lexique-grammaire
+Constructions impersonnelles et expressions verbales figées
+Benoît Sagot1, Laurence Danlos2
+
+Une extraction automatique consisterait à prendre :
+• toutes les entrés de la table 5, dont la propriété définitoire est justement
+l'existence de la construction (Que P)0 V Prép N1 associée à la construction
+impersonnelle Il V Prép N1 Que P (voir Que Luc parte plaît à Zoé versus Il
+plaît à Zoé que Luc parte),
+• toutes les entrées de la table 17, dont la propriété définitoire est Il V (Prép ce)
+Que P Prép N2 (voir Il semble à Luc que Zoé est partie),
+• les quelques entrées des Tables 7 (N0 V à ce que P) et 8 (N0 V de ce que P)
+où il existe une colonne intitulée [extrap] (qui dépend de la colonne intitulé
+Sujet) qui code la possibilité d'extraposer un sujet phrastique (voir Que Zoé soit
+partie découle de ce que Luc est arrivé versus Il découle de ce que Luc est
+arrivé que Zoé soit partie).
+Une telle extraction automatique aurait induit du bruit et du silence.
+
