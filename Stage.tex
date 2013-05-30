@@ -234,6 +234,15 @@ La tâche d'étiquetage fonctionnel se réduit à un simple problème de classif
 
 Une seconde évaluation permet de mesurer les résultats sur la chaîne d'analyse complète et obtient une précision de 86.56\%. Une dernière évaluation leur a permis de tester leur modèle sur le corpus EASy (ref), moyennant une conversion, et donne un résultat de 66\%, comparable aux meilleurs résultats de la campagne d'évaluation EASy (65\%). Cependant, leur modèle est moins performant lors d'un changement de domaine (médical, par exemple).
 
+\paragraph{Extraction têtes}
+Pour analyser une construction, nous nous intéressons à sa tête ainsi qu'à son complément. Il aurait pu être judicieux d'utiliser un analyseur de dépendances, mais toutes les informations que celui-ci nous fournirait ne nous intéressent pas ici. Nous avons principalement besoin de reconnaître les constituants syntaxiques et de trouver leur tête. Nous utilisons l'analyseur syntaxique statistique en constituants d'OpenNLP (ref). Pour déterminer la tête de chaque constituant, nous avons recours à une table de propagation de têtes pour le français. Cette table, initialement proposée par Magerman 1995 puis améliorée par Collins pour l'anglais, a été adaptée au français par Arun & Keller. Nous en utilisons la version modifiée par Dybro-Johansen puis Djamé Seddah 2010. Cette table est composée de règles qui définissent comment chercher la tête selon le type du constituant. Par exemple, pour un groupe verbal, il faut chercher le dernier verbe du constituant.
+
+\paragraph{Lexique-grammaire}
+Le lexique-grammaire du français (Gross Leclère) décrit les structures syntaxiques élémentaires. Cette ressource est constituée de tables, chacune se présentant sous forme matricielle. Chaque ligne représente une entité lexicale, et les colonnes permettent d'identifier les propriétés définitoires propres à cette entité. Il recense notamment toutes les expressions figées contenant le pronom \og \textit{il} \fg{}. Nous pouvons considérer que si elles sont figées, ces expressions sont à caractère impersonnel. Ce lexique-grammaire recense également des verbes ou adjectifs ainsi que leurs propriétés. Ce sont les verbes qui nous intéressent particulièrement puisque le pronom \og \textit{il} \fg{} est un sujet. Pour chaque verbe recensé dans le lexique-grammaire, M. Gross et son équipe donnent un exemple d'utilisation de celui-ci. Il se trouve que si le verbe est anaphorique, le sujet de l'exemple est principalement un nom propre ou un groupe nominal. A l'inverse, les exemples des verbes impersonnels ne peuvent contenir comme sujet que le \og \textit{il} \fg{}. Nous pouvons donc extraire ces informations et lister les verbes ancrant des constructions impersonnelles.
+
+\paragraph{Lefff}
+A la suite de son travail sur l'outil ILIMP, Laurence Danlos accompagnée de Benoît Sagot a mis en place un lexique morphologique et syntaxique du français : Le Lefff (Lexique des Formes Fléchies du Français)
+
 \section{Corpus de travail}
 \label{corpus}
 
@@ -284,3 +293,6 @@ La présence de certains éléments particuliers peut aussi caractériser des co
 \bibliography{biblio}
 
 \end{document}
+
+
+%http://people.csail.mit.edu/mcollins/papers/heads

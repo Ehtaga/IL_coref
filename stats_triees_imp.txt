@@ -1,0 +1,1161 @@
+     95 il convient 
+     73 il s'agit de
+     58 il s'agit d'
+     49 il est possi
+     47 il est vrai 
+     45 il appartien
+     41 il y a pas d
+     37 il faudrait 
+     33 il apparaît 
+     28 il est clair
+     27 il s' agit d
+     26 il s'agissai
+     26 il est donc 
+     25 il y a donc 
+     25 il existe pa
+     24 il est pas p
+     23 il semble qu
+     23 il est néces
+     22 il s'agit pa
+     20 il est certa
+     20 il en résult
+     18 il ressort d
+     18 il faut que 
+     16 il y a quelq
+     15 il y aurait 
+     15 il faut donc
+     15 il est vrai,
+     15 il est prévu
+     14 il y a lieu 
+     14 il existe au
+     14 il est évide
+     13 il existe en
+     13 il conviendr
+     12 il s'agit là
+     12 il faut pas 
+     12 il faut bien
+     12 il existe de
+     12 il est pas d
+     12 il est diffi
+     12 il en a été 
+     11 il y a un an
+     11 il semblerai
+     11 il importe d
+     11 il est plus 
+     11 il en est de
+     10 il s'agit do
+     10 il faut ajou
+     10 il est intér
+     10 il est guère
+     10 il est à not
+     10 il en est ai
+      9 il y a plus 
+      9 il s' agit p
+      9 il s'agit en
+      9 il s'agit bi
+      9 il nous semb
+      9 il lui faut 
+      9 il existe un
+      9 il est proba
+      9 il est pas e
+      9 il est impos
+      9 il est impor
+      9 il convient,
+      8 il y a deux 
+      8 il va de soi
+      8 il suffit de
+      8 il se trouve
+      8 il leur faut
+      8 il faut note
+      8 il est indis
+      8 il est exact
+      8 il en va ain
+      8 il a pas été
+      7 il s'ensuit 
+      7 il lui reste
+      7 il faut soul
+      7 il faut fair
+      7 il existe da
+      7 il est encor
+      7 il est égale
+      7 il est bien 
+      7 il en va pas
+      7 il  en demeu
+      6 il y a pas l
+      6 il y a au mo
+      6 il vaut mieu
+      6 il serait po
+      6 il s' agissa
+      6 il s'agirait
+      6 il s' agirai
+      6 il reste mai
+      6 il faut rapp
+      6 il faut enco
+      6 il faut avoi
+      6 il faut auss
+      6 il faut alor
+      6 il fallait d
+      6 il existait 
+      6 il est regre
+      6 il est quest
+      6 il est pas s
+      6 il est pas r
+      6 il est incon
+      6 il est fait 
+      6 il est essen
+      6 il est ainsi
+      6 il est à cra
+      6 il empêche q
+      6 il aurait pa
+      6 il arrive qu
+      5 il y aura pa
+      5 il y a quatr
+      5 il y a peu d
+      5 il y a aucur
+      5 il suffit qu
+      5 il subsiste 
+      5 il serait so
+      5 il se produi
+      5 il semble bi
+      5 il s'avère q
+      5 il s'agit du
+      5 il s' agisse
+      5 il revient à
+      5 il reste que
+      5 il peut y av
+      5 il faut savo
+      5 il faut dire
+      5 il faut atte
+      5 il fallait r
+      5 il existe do
+      5 il est souve
+      5 il est peut-
+      5 il est pas n
+      5 il est pas a
+      5 il est en ef
+      5 il est d'aut
+      5 il est aussi
+      5 il est à sig
+      5 il est alors
+      5 il en ressor
+      5 il a été pos
+      5 il a ainsi é
+      4 il y avait, 
+      4 il y a tout 
+      4 il y a rien 
+      4 il y a pas..
+      4 il y a en ef
+      4 il y a des c
+      4 il y a aucun
+      4 il suffit po
+      4 il serait fa
+      4 il s'agit, p
+      4 il s' agit e
+      4 il reste plu
+      4 il ressort q
+      4 il pleut " q
+      4 il me semble
+      4 il lui faudr
+      4 il leur faud
+      4 il faut tout
+      4 il faut le d
+      4 il faut égal
+      4 il faudra bi
+      4 il faudra at
+      4 il fallait e
+      4 il fait chau
+      4 il existerai
+      4 il existe pl
+      4 il existe ce
+      4 il est très 
+      4 il est toute
+      4 il est tout 
+      4 il est tenta
+      4 il est préfé
+      4 il est permi
+      4 il est pas q
+      4 il est norma
+      4 il est manif
+      4 il est maint
+      4 il est logiq
+      4 il est cepen
+      4 il est assez
+      4 il en découl
+      4 il devient p
+      4 il découle d
+      4 il a été déc
+      3 il y en avai
+      3 il y en a qu
+      3 il y a un pe
+      3 il y a un mo
+      3 il y a pour 
+      3 il y a plusi
+      3 il y a pas u
+      3 il y a pas e
+      3 il y a pas a
+      3 il y a guère
+      3 il y a envir
+      3 il y a encor
+      3 il y a d'abo
+      3 il y a bien 
+      3 il suffit pa
+      3 il suffirait
+      3 il sera poss
+      3 il sera octr
+      3 il sera néce
+      3 il serait pr
+      3 il serait in
+      3 il serait di
+      3 il se peut q
+      3 il semble po
+      3 il semble pa
+      3 il semble en
+      3 il se forme 
+      3 il s'avère i
+      3 il saurait ê
+      3 il s'agit to
+      3 il s'agit qu
+      3 il s'agit pr
+      3 il s'agit no
+      3 il s' agit n
+      3 il s'agit ic
+      3 il revient s
+      3 il reste enc
+      3 il reste cep
+      3 il pourrait 
+      3 il peut être
+      3 il nous faut
+      3 il nous faud
+      3 il nous appa
+      3 il lui appar
+      3 il incombera
+      3 il incombe a
+      3 il importe q
+      3 il faut suiv
+      3 il faut se f
+      3 il faut pren
+      3 il faut plus
+      3 il faut , en
+      3 il faut cepe
+      3 il faudra en
+      3 il fallait p
+      3 il existe ég
+      3 il existe, e
+      3 il existe bi
+      3 il était pos
+      3 il était pas
+      3 il était imp
+      3 il était don
+      3 il est temps
+      3 il est remar
+      3 il est propo
+      3 il est préci
+      3 il est peu p
+      3 il est paten
+      3 il est pas v
+      3 il est oblig
+      3 il est natur
+      3 il est jurid
+      3 il est établ
+      3 il est envis
+      3 il est aisé 
+      3 il en va de 
+      3 il en va aut
+      3 il en reste 
+      3 il enphra
+      3 il en existe
+      3 il en est
+      3 il en demeur
+      3 il doit être
+      3 il aurait ét
+      3 il apparaît,
+      3 il apparait 
+      3 il apparaiss
+      3 il a été con
+      2 il y avait u
+      2 il y avait p
+      2 il y aura un
+      2 il y aura uc
+      2 il y aura pl
+      2 il y aura de
+      2 il y a uquin
+      2 il y a upare
+      2 il y a un tr
+      2 il y a trois
+      2 il y a six m
+      2 il y a sans 
+      2 il y a qu'uv
+      2 il y a progr
+      2 il y a Pierr
+      2 il y a pas v
+      2 il y a pas p
+      2 il y a pas à
+      2 il y a opéra
+      2 il y a néces
+      2 il y a même 
+      2 il y a les a
+      2 il y a le ri
+      2 il y a là un
+      2 il y a la pl
+      2 il y a huit 
+      2 il y a évide
+      2 il y a eu un
+      2 il y a eu au
+      2 il y a eu « 
+      2 il y a entre
+      2 il y a en ou
+      2 il y a effec
+      2 il y a dix a
+      2 il y a des t
+      2 il y a de la
+      2 il y a de fa
+      2 il y a cinq 
+      2 il y a ceux 
+      2 il y a certe
+      2 il y a cepen
+      2 il y a, bien
+      2 il y a à pré
+      2 il y a ainsi
+      2 il y a 528 0
+      2 il y a 4,55 
+      2 il y a 3 à 4
+      2 il valait mi
+      2 il uautre co
+      2 il s' y déve
+      2 il suffit, p
+      2 il suffit au
+      2 il souhaite 
+      2 il soit beso
+      2 il s'est pro
+      2 il sera tout
+      2 il sera ques
+      2 il sera plus
+      2 il serait pl
+      2 il serait pe
+      2 il serait im
+      2 il serait év
+      2 il serait ce
+      2 il semble di
+      2 il se fait p
+      2 il s'avère p
+      2 il saurait y
+      2 il s'agit po
+      2 il s'agit pl
+      2 il s'agit nu
+      2 il s'agit mê
+      2 il s'agit ma
+      2 il s'agit le
+      2 il s' agit l
+      2 il s'agit ju
+      2 il s'agit év
+      2 il s'agit es
+      2 il s'agit ég
+      2 il s'agit, e
+      2 il s'agit ce
+      2 il s'agit au
+      2 il s' agit a
+      2 il s'agira d
+      2 il s' agira 
+      2 il revient d
+      2 il revient, 
+      2 il résulte q
+      2 il résulte d
+      2 il resterait
+      2 il reste qu'
+      2 il reste don
+      2 il reste à m
+      2 il reste alo
+      2 il reste à d
+      2 il reste à c
+      2 il restait l
+      2 il ressort, 
+      2 il que certa
+      2 il pleut ". 
+      2 il peut semb
+      2 il peut plus
+      2 il peut para
+      2 il peut donc
+      2 il peut arri
+      2 il parle de 
+      2 il paraît pr
+      2 il paraît pa
+      2 il paraît do
+      2 il nous para
+      2 il nous est 
+      2 il nous arri
+      2 il m'avait p
+      2 il m'a sembl
+      2 il m'a paru 
+      2 il manque un
+      2 il manque ua
+      2 il manque u`
+      2 il lui revie
+      2 il lui impor
+      2 il lui est p
+      2 il leur manq
+      2 il leur a ét
+      2 il les expli
+      2 il le consid
+      2 il la manger
+      2 il importera
+      2 il importe c
+      2 il importe, 
+      2 il imaginabl
+      2 il faut un l
+      2 il faut touj
+      2 il faut susc
+      2 il faut souv
+      2 il faut se t
+      2 il faut se r
+      2 il faut s'as
+      2 il faut s'ap
+      2 il faut sans
+      2 il faut remo
+      2 il faut qu' 
+      2 il faut préc
+      2 il faut pouv
+      2 il faut pour
+      2 il faut pass
+      2 il faut part
+      2 il faut, par
+      2 il faut, nou
+      2 il faut les 
+      2 il faut le l
+      2 il faut jama
+      2 il faut ici 
+      2 il faut évit
+      2 il faut être
+      2 il faut espé
+      2 il faut ente
+      2 il faut en r
+      2 il faut divi
+      2 il faut dist
+      2 il faut des 
+      2 il faut dans
+      2 il faut cons
+      2 il faut calc
+      2 il faut " (B
+      2 il faut à to
+      2 il faut alle
+      2 il faut ains
+      2 il faut, à c
+      2 il faudra s'
+      2 il faudra ré
+      2 il faudra à 
+      2 il fallait s
+      2 il fallait m
+      2 il fait tous
+      2 il fait aucu
+      2 il existe uf
+      2 il existe ud
+      2 il existe tr
+      2 il existe sa
+      2 il existe qu
+      2 il existe pe
+      2 il existe év
+      2 il existe, d
+      2 il existe d'
+      2 il existe ai
+      2 il existe ac
+      2 il existe à 
+      2 il existe, a
+      2 il évoque et
+      2 il eût été i
+      2 il était rep
+      2 il était plu
+      2 il était nul
+      2 il est utile
+      2 il est trop 
+      2 il est sympt
+      2 il est sur l
+      2 il est stipu
+      2 il est sans 
+      2 il est redou
+      2 il est rappe
+      2 il est point
+      2 il est pas i
+      2 il est pas f
+      2 il est par c
+      2 il est loin 
+      2 il est indub
+      2 il est indiq
+      2 il est impér
+      2 il est facil
+      2 il est exclu
+      2 il est dit d
+      2 il est de no
+      2 il est de l'
+      2 il est décis
+      2 il est " bap
+      2 il est arriv
+      2 il est à pré
+      2 il est appar
+      2 il est admis
+      2 il est actue
+      2 il est acces
+      2 il est absol
+      2 il en va 
+      2 il entre pas
+      2 il  en reste
+      2 il  en marqu
+      2 il en faut a
+      2 il  en est r
+      2 il en est pa
+      2 il en allait
+      2 il doit y av
+      2 il diminue l
+      2 il devrait p
+      2 il devient a
+      2 il devienau 
+      2 il devait êt
+      2 il désigcomm
+      2 il demeure q
+      2 il demeure p
+      2 il défend sa
+      2 il choisit d
+      2 il aurait fa
+      2 il appartena
+      2 il a jamais 
+      2 il a guère d
+      2 il a fallu s
+      2 il a fallu m
+      2 il a fallu d
+      2 il a fallu a
+      2 il a été vai
+      2 il a été sig
+      2 il a été mon
+      2 il a été jug
+      2 il a été est
+      2 il a donc ét
+      1 il y va du c
+      1 il y va de l
+      1 il y va au t
+      1 il y un peu 
+      1 il y pas, da
+      1 il  y paraît
+      1 il y manque 
+      1 il y existe 
+      1 il y eut un 
+      1 il y eut pas
+      1 il y eut par
+      1 il y eut don
+      1 il y eut 42 
+      1 il y est sur
+      1 il y est rap
+      1 il y est éga
+      1 il y en ait 
+      1 il y en a
+      1 il y a vingt
+      1 il y avait t
+      1 il y avait q
+      1 il y avait e
+      1 il y avait d
+      1 il y avait b
+      1 il y avait ,
+      1 il y a uving
+      1 il y a usort
+      1 il y aura uo
+      1 il y aura to
+      1 il y aura qu
+      1 il y aura li
+      1 il y aura do
+      1 il y aura di
+      1 il y aura at
+      1 il y aura 62
+      1 il y a uprop
+      1 il y a un te
+      1 il y a un st
+      1 il y a un si
+      1 il y a un ra
+      1 il y a un po
+      1 il y a un pa
+      1 il y a un gr
+      1 il y a un en
+      1 il y a un ef
+      1 il y a unéce
+      1 il y a une_B
+      1 il y a un de
+      1 il y a un " 
+      1 il y a uinte
+      1 il y a uéché
+      1 il y a udiza
+      1 il y aucun e
+      1 il y a ucont
+      1 il y a ucert
+      1 il y a très 
+      1 il y a toujo
+      1 il y a seule
+      1 il y a sept 
+      1 il y a qu' u
+      1 il y a quinz
+      1 il y a que q
+      1 il y a quara
+      1 il y a qu' à
+      1 il y a presq
+      1 il y a prati
+      1 il y a pourt
+      1 il y a plus,
+      1 il y a peut-
+      1 il y a peu l
+      1 il y a peu c
+      1 il y a peu, 
+      1 il y a pénur
+      1 il y a pas q
+      1 il y a pas f
+      1 il y a pas c
+      1 il y a pas, 
+      1 il y a pas ,
+      1 il y a parfo
+      1 il y a par c
+      1 il y a , par
+      1 il y a ou no
+      1 il y a ni pr
+      1 il y a néanm
+      1 il y a moins
+      1 il y a l'ins
+      1 il y a , leu
+      1 il y a le me
+      1 il y a la ré
+      1 il y a là, p
+      1 il y a là nu
+      1 il y a l' af
+      1 il y a, je c
+      1 il y a jamai
+      1 il y ait uno
+      1 il y ait un 
+      1 il y a incer
+      1 il y a gros 
+      1 il y a fort 
+      1 il y a forma
+      1 il y a eu de
+      1 il y a eu ce
+      1 il y a eu , 
+      1 il y a en re
+      1 il y a, en o
+      1 il y a en fa
+      1 il y a en co
+      1 il y a égale
+      1 il y a doute
+      1 il y a dix-n
+      1 il y a de va
+      1 il y a de tr
+      1 il y a des r
+      1 il y a des o
+      1 il y a des e
+      1 il y a des_B
+      1 il y a des a
+      1 il y a , de 
+      1 il y a , dan
+      1 il y a créat
+      1 il y a compé
+      1 il y a coexi
+      1 il y a certa
+      1 il y a ce qu
+      1 il y a beauc
+      1 il y a aux a
+      1 il y a aussi
+      1 il y a aucuo
+      1 il y a aucui
+      1 il y a aucuf
+      1 il y a aucue
+      1 il y a aucud
+      1 il y a, à pr
+      1 il y a affro
+      1 il y a actue
+      1 il y a 7 000
+      1 il y a 525 0
+      1 il y a 4,6 m
+      1 il y a 20 an
+      1 il y a 18 mo
+      1 il y a 17 pr
+      1 il y a 13 mi
+      1 il y a 10 an
+      1 il vise à pr
+      1 il veut obte
+      1 il veut cons
+      1 il venait à 
+      1 il va s'en d
+      1 il va sans d
+      1 il va falloi
+      1 il tire les 
+      1 il tient à l
+      1 il supprime 
+      1 il suffit se
+      1 il suffit en
+      1 il suffit (e
+      1 il suffit do
+      1 il suffisait
+      1 il suffira d
+      1 il suffira a
+      1 il subsistai
+      1 il sont pas 
+      1 il soit sala
+      1 il soit pour
+      1 il soit poss
+      1 il soit cons
+      1 il s'impose 
+      1 il si l'aute
+      1 il s'établis
+      1 il s'est pos
+      1 il s' est di
+      1 il s'est avé
+      1 il s'est agi
+      1 il sert à ri
+      1 il sera urge
+      1 il sera stat
+      1 il serait pa
+      1 il serait né
+      1 il serait ma
+      1 il serait en
+      1 il serait do
+      1 il serait dè
+      1 il serait dé
+      1 il serait al
+      1 il sera inté
+      1 il sera ici 
+      1 il sera en e
+      1 il sera dema
+      1 il se pourra
+      1 il se passe 
+      1 il s'ensuivi
+      1 il s'ensuit,
+      1 il s'en suit
+      1 il se noue u
+      1 il s'en est 
+      1 il s' en 
+      1 il semble y 
+      1 il semble pl
+      1 il semble, p
+      1 il semble mo
+      1 il semble mê
+      1 il semble lo
+      1 il semble ju
+      1 il semble éq
+      1 il semble ce
+      1 il semble av
+      1 il semble au
+      1 il semble ai
+      1 il semblait 
+      1 il se forme,
+      1 il se dresse
+      1 il se crée a
+      1 il saurait e
+      1 il s'agit un
+      1 il s'agit se
+      1 il s' agit q
+      1 il s'agit, o
+      1 il s'agit ni
+      1 il s' agit m
+      1 il s'agit in
+      1 il s' agit i
+      1 il s'agit gé
+      1 il s'agit fo
+      1 il s'agit et
+      1 il s'agit ef
+      1 il s'agit dé
+      1 il s'agit da
+      1 il s'agit, d
+      1 il s'agit, c
+      1 il s'agit al
+      1 il s' agit à
+      1 il s'agira, 
+      1 il reviendra
+      1 il résultera
+      1 il résulte, 
+      1 il restera d
+      1 il reste pou
+      1 il reste la 
+      1 il reste imp
+      1 il reste, en
+      1 il reste à t
+      1 il reste à s
+      1 il reste à l
+      1 il reste à e
+      1 il restait c
+      1 il restait à
+      1 il restait, 
+      1 il ressort t
+      1 il ressort :
+      1 il relève pa
+      1 il propose d
+      1 il prétend p
+      1 il pouvait ê
+      1 il pourra s'
+      1 il pleut , l
+      1 il peut y en
+      1 il peut se f
+      1 il peut s'ag
+      1 il peut exis
+      1 il peut en r
+      1 il peut en a
+      1 il peut, en 
+      1 il peut alor
+      1 il peut accu
+      1 il permis à 
+      1 il perceptio
+      1 il pas possi
+      1 il pas plus 
+      1 il pas inéqu
+      1 il pas fallu
+      1 il pas édict
+      1 il paraît po
+      1 il paraît pl
+      1 il paraît ju
+      1 il paraît im
+      1 il paraît gu
+      1 il paraît, e
+      1 il paraît co
+      1 il paraissai
+      1 il nous manq
+      1 il nous impo
+      1 il nous en f
+      1 il nous a se
+      1 il nous a pa
+      1 il mieux val
+      1 il m' est ap
+      1 il manque ur
+      1 il manque au
+      1 il m'a été a
+      1 il lui serai
+      1 il lui paraî
+      1 il lui incom
+      1 il lui était
+      1 il lui est r
+      1 il lui a fal
+      1 il leur semb
+      1 il leur revi
+      1 il leur rest
+      1 il leur perm
+      1 il leur para
+      1 il leur inco
+      1 il leur étai
+      1 il leur est 
+      1 il leur en a
+      1 il leur appa
+      1 il l'estime 
+      1 il l' est en
+      1 il les repla
+      1 il le semble
+      1 il lephra
+      1 il le faut, 
+      1 il judicieux
+      1 il incombe p
+      1 il incombe e
+      1 il incombe c
+      1 il incombe à
+      1 il incombait
+      1 il importe p
+      1 il importe a
+      1 il fut un te
+      1 il fut savoi
+      1 il fut donc 
+      1 il fut aussi
+      1 il faut y ra
+      1 il faut y aj
+      1 il faut veil
+      1 il faut upol
+      1 il faut uloc
+      1 il faut ulig
+      1 il faut uéne
+      1 il faut ubon
+      1 il faut tire
+      1 il faut surt
+      1 il faut supp
+      1 il faut stim
+      1 il faut souh
+      1 il faut sort
+      1 il faut soi-
+      1 il faut s' o
+      1 il faut s'in
+      1 il faut sign
+      1 il faut s' i
+      1 il faut serv
+      1 il faut, sel
+      1 il faut se d
+      1 il faut s' e
+      1 il faut s'at
+      1 il faut sacr
+      1 il faut s' a
+      1 il faut rien
+      1 il faut réno
+      1 il faut remp
+      1 il faut reme
+      1 il faut rele
+      1 il faut rédu
+      1 il faut reco
+      1 il faut rech
+      1 il faut réal
+      1 il faut réag
+      1 il faut " ra
+      1 il faut proc
+      1 il faut prév
+      1 il faut prés
+      1 il faut, pou
+      1 il faut paye
+      1 il faut parl
+      1 il faut ni e
+      1 il faut mett
+      1 il faut , ma
+      1 il faut lui 
+      1 il faut le t
+      1 il faut lent
+      1 il faut le_B
+      1 il faut l'" 
+      1 il faut intr
+      1 il faut inte
+      1 il faut inst
+      1 il faut inje
+      1 il faut indi
+      1 il faut inco
+      1 il faut imag
+      1 il faut étab
+      1 il faut envi
+      1 il faut en v
+      1 il faut ensu
+      1 il faut en p
+      1 il faut en m
+      1 il faut en g
+      1 il faut enfi
+      1 il faut en e
+      1 il faut, en 
+      1 il faut deux
+      1 il faut dépe
+      1 il faut dépa
+      1 il faut démo
+      1 il faut défi
+      1 il faut déco
+      1 il faut déci
+      1 il faut, dan
+      1 il faut d'ab
+      1 il faut, cro
+      1 il faut comp
+      1 il faut comm
+      1 il faut comb
+      1 il faut cite
+      1 il faut choi
+      1 il faut brûl
+      1 il faut augm
+      1 il faut, apr
+      1 il faut appo
+      1 il faut, à n
+      1 il faut allo
+      1 il faut à la
+      1 il faut à l'
+      1 il faut adme
+      1 il faut ache
+      1 il faut acco
+      1 il faut abso
+      1 il faudra tr
+      1 il faudra sa
+      1 il faudra pr
+      1 il faudra, p
+      1 il faudra né
+      1 il faudra in
+      1 il faudra de
+      1 il faudra co
+      1 il faudra ch
+      1 il faudra au
+      1 il faudra , 
+      1 il fallut ét
+      1 il fallut do
+      1 il fallait y
+      1 il fallait u
+      1 il fallait q
+      1 il fallait l
+      1 il fallait f
+      1 il fallait a
+      1 il fallait, 
+      1 il fait pas 
+      1 il fait obli
+      1 il fait intr
+      1 il faille do
+      1 il existe vi
+      1 il existe ut
+      1 il existe ur
+      1 il existe up
+      1 il existe ul
+      1 il existe ri
+      1 il existera 
+      1 il existe né
+      1 il existe lo
+      1 il existe la
+      1 il existe, l
+      1 il existe ic
+      1 il existe gu
+      1 il existe dé
+      1 il existe, c
+      1 il existe as
+      1 il existe ab
+      1 il existe, à
+      1 il existe " 
+      1 il existe _ 
+      1 il eût été c
+      1 il été jugé 
+      1 il était " t
+      1 il était sur
+      1 il était ris
+      1 il était pré
+      1 il était inu
+      1 il était fin
+      1 il était ess
+      1 il était dem
+      1 il était cou
+      1 il était app
+      1 il est vrais
+      1 il est vrai.
+      1 il est vain 
+      1 il est urgen
+      1 il est un dé
+      1 il est un au
+      1 il est toujo
+      1 il est tenu 
+      1 il est sûr q
+      1 il est surpr
+      1 il est souli
+      1 il est sain 
+      1 il est raris
+      1 il est rare,
+      1 il est rappo
+      1 il est raiso
+      1 il est pour 
+      1 il est posit
+      1 il est porté
+      1 il est pas g
+      1 il est pas é
+      1 il est pas c
+      1 il est parfo
+      1 il est parad
+      1 il est, par 
+      1 il est obser
+      1 il est nulle
+      1 il est notoi
+      1 il est notam
+      1 il est néanm
+      1 il est montr
+      1 il est moins
+      1 il est l'aut
+      1 il est irréa
+      1 il est inter
+      1 il est injus
+      1 il est indif
+      1 il est inacc
+      1 il est extrê
+      1 il est estim
+      1 il est en re
+      1 il est en pa
+      1 il est enfin
+      1 il est, en e
+      1 il est d'usa
+      1 il est désor
+      1 il est dès l
+      1 il est des c
+      1 il est de rè
+      1 il est délic
+      1 il est déjà 
+      1 il est de fa
+      1 il est de co
+      1 il est dans 
+      1 il est dange
+      1 il est curie
+      1 il est coura
+      1 il est const
+      1 il est connu
+      1 il est commu
+      1 il est choqu
+      1 il est certe
+      1 il est , cep
+      1 il est capit
+      1 il est bon d
+      1 il est bient
+      1 il est beauc
+      1 il est aucus
+      1 il est à sou
+      1 il est à rem
+      1 il est à red
+      1 il est à rap
+      1 il est à nou
+      1 il est acqui
+      1 il est à con
+      1 il en va dif
+      1 il en va dan
+      1 il en va d'a
+      1 il en soit a
+      1 il en soit ,
+      1 il en sera d
+      1 il en sera a
+      1 il  en sera 
+      1 il en ser
+      1 il en res
+      1 il en ira ai
+      1 il en fut ai
+      1 il en fut , 
+      1 il en faut p
+      1 il en fallai
+      1 il en était 
+      1 il en éta
+      1 il en est to
+      1 il  en est p
+      1 il en est no
+      1 il en aurait
+      1 il en alla d
+      1 il en a c
+      1 il emprunte 
+      1 il empêche :
+      1 il doit y en
+      1 il doit plus
+      1 il dispose a
+      1 il devrait s
+      1 il devrait l
+      1 il devrait e
+      1 il devient m
+      1 il demeure d
+      1 il de même e
+      1 il de la pub
+      1 il découle, 
+      1 il couvre le
+      1 il convenait
+      1 il contribue
+      1 il commence 
+      1 il avait fal
+      1 il avait été
+      1 il avait enc
+      1 il avait aup
+      1 il aurait dû
+      1 il " aurait 
+      1 il au Japon 
+      1 il a udurée 
+      1 il a semblé 
+      1 il arrive to
+      1 il arrive pa
+      1 il arrive mê
+      1 il arrive au
+      1 il a rédigé 
+      1 il a pu être
+      1 il apparaîtr
+      1 il a porté c
+      1 il a organis
+      1 il a même pa
+      1 il alors coh
+      1 il ajoute : 
+      1 il a fallu e
+      1 il a fallu c
+      1 il a fallu à
+      1 il a fait fo
+      1 il a été tro
+      1 il a été sus
+      1 il a été sug
+      1 il a été rel
+      1 il a été rec
+      1 il a été rap
+      1 il a été pro
+      1 il a été pré
+      1 il a été obs
+      1 il a été lar
+      1 il a été fai
+      1 il a été don
+      1 il a été ain
+      1 il a été acc
+      1 il a engagée
+      1 il a en effe
+      1 il a bien fa
+      1 il a bien ex
