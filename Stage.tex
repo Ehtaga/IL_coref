@@ -241,22 +241,7 @@ Pour analyser une construction, nous nous intéressons à sa tête ainsi qu'à s
 Le lexique-grammaire du français (Gross Leclère) décrit les structures syntaxiques élémentaires. Cette ressource est constituée de tables, chacune se présentant sous forme matricielle. Chaque ligne représente une entité lexicale, et les colonnes permettent d'identifier les propriétés définitoires propres à cette entité. Il recense notamment toutes les expressions figées contenant le pronom \og \textit{il} \fg{}. Nous pouvons considérer que si elles sont figées, ces expressions sont à caractère impersonnel. Ce lexique-grammaire recense également des verbes ou adjectifs ainsi que leurs propriétés. Ce sont les verbes qui nous intéressent particulièrement puisque le pronom \og \textit{il} \fg{} est un sujet. Pour chaque verbe recensé dans le lexique-grammaire, M. Gross et son équipe donnent un exemple d'utilisation de celui-ci. Il se trouve que si le verbe est anaphorique, le sujet de l'exemple est principalement un nom propre ou un groupe nominal. A l'inverse, les exemples des verbes impersonnels ne peuvent contenir comme sujet que le \og \textit{il} \fg{}. Nous pouvons donc extraire ces informations et lister les verbes ancrant des constructions impersonnelles.
 
 \paragraph{Lefff}
-Benoît Sagot a mis en place un lexique morphologique et syntaxique du français : Le Lefff (Lexique des Formes Fléchies du Français). C'est un lexique électronique recensant toutes les formes fléchies de la langue française, et qui présente des informations morphologiques et syntaxiques pour chacune d'entre elles. Moins riche que le lexique-grammaire, il a pour avantage d'être facilement utilisable dans les applications de Traitement Automatique du Langage.
-
-Il recense plus de 110 000 lemmes, correspondant à plus de 520 000 entrées (formes verbales, certaines formes adjectivales et nominales, prépositions, \ldots). A chaque entrée, sont renseignées les informations syntaxiques, mais aussi des propriétés qui vont permettre d'établir un cadre de sous-catégorisation à la forme fléchie.
-
-En 2006, B. Sangot et L. Danlos ont entreprit de l'enrichir à l'aide des informations fournies par le lexique-grammaire, en particulier pour les constructions impersonnelles et les expressions verbales figées. Danlos a ainsi repris son travail sur l'outil ILIMP et en a extrait les informations pouvant être apportées au Lefff. Le travail a été plus complexe pour le cas des expressions verbales figées, il est donc encore en cours de recherche.
-%TODO Retranscrire
-
-\paragraph{Stanford}
-Alors que la plupart des systèmes de résolution de coréférence  s'intéressent aux mentions deux à deux, à l'aide d'une fonction d'\og appariement \fg{} (\textit{pairwise}), certains travaux commencent à envisager cette tâche d'une manière plus globale. En effet, ils cherchent à élaborer des clusters pointant sur la même entité, au lieu de chercher si 2 mentions précises sont coréférentes. C'est le cas par exemple des recherches de Rhagu et al (ref). Leur particularité est de résoudre le problème en plusieurs étapes, en incorporant des traits petit à petit. Ils partent des traits obtenant la meilleure précision, puis ajoutent au fur et à mesure des traits de moins bonne précision mais ayant un meilleur rappel. Chaque étape produit des clusters, qui sont ensuite donnés en entrée à l'étape suivante. Cette technique permet de favoriser les traits les plus robustes.
-Rhagu a eu recours à 7 étapes pour former ses clusters. Evalué sur un corpora extrait d'ACE2004 et MUC6, il obtient des résultats équivalents voire meilleurs que les travaux état de l'art, selon les mesures employées (pairwise F1, B\up{3} et MUC). Ils montrent aussi que l'incorporation des traits en plusieurs étapes est plus efficace qu'en une seule.
-
-Ces travaux ont par la suite été repris et améliorés par la même équipe, afin de participer à CONLL.
-%TODO CONLL
-Ils ont en effet ajouté 5 étapes, ont incorporé une étape de détection de mention au début de la chaîne de traitement, ainsi qu'une étape de post-traitement permettant de rendre leur système compatible avec les spécifications de la tâche.
-%TODO shared task OntoNotes
-Ce système a obtenu les meilleurs scores pour les deux tâches (ouverte 57.8 et fermée 58.3).
+A la suite de son travail sur l'outil ILIMP, Laurence Danlos accompagnée de Benoît Sagot a mis en place un lexique morphologique et syntaxique du français : Le Lefff (Lexique des Formes Fléchies du Français)
 
 \section{Corpus de travail}
 \label{corpus}
@@ -266,23 +251,6 @@ Cette ressource, composée d'un million de mots, annote une grande partie des ex
 L'annotation permet d'indiquer les éléments mis en jeu ainsi que la relation entre l'expression anaphorique et son(ses) antécédent(s). Cette relation peut appartenir à l'une des 5 classes suivantes : coréférence, membre de, description, phrase ou indéfinie.
 
 L'annotation a été faite à la main par deux linguistes (le processus n'est pas exclusivement manuel puisque les expressions sont pré-annotées automatiquement et des outils d'édition sont utilisés pour simplifier la tâche), au format XML. Afin de mesurer la fiabilité de l'annotation, une évaluation sur 5\% du corpus a été effectuée.
-
-\paragraph{Stats}
-%TODO A bouger + rédiger
-
-\paragraph*{}
-\begin{tabular}{|l|r|r|r|c|}
-   \hline
-   \textsc{Corpus} & \textsc{Imp} & \textsc{Ana} & \textsc{Total} & \textsc{Proportion Imp}\\
-   \hline
-   Stendhal & 2239 & 1240 & 3479 & 64\%\\
-   Stendhal articles Hermès & 558 & 371 & 929 & 60\%\\
-   XRCE JOC & 1043 & 373 & 1416 & 74\%\\
-   XRCE Le Monde & 695 & 567 & 1262 & 55\%\\
-   \hline
-   \textsc{Total} & 4535 & 2551 & 7096 & 64\%\\
-   \hline
-\end{tabular}
 
 \paragraph{}
 Nous travaillons sur la portion du corpus contenant les articles du journal \emph{Le Monde} (rubrique économie). Cette portion contient 202 091 mots. Ceci nous permet d'établir rapidement notre processus d'extraction de traits.
