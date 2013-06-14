@@ -11,7 +11,7 @@
   colorlinks=true,
   citecolor=black!60!blue,
   linkcolor=black!40!red,
-}
+}\frac{•}{•}
 
 
 \title{Détermination du caractère anaphorique du pronom personnel \og{}\textit{il}\fg{}}
@@ -44,6 +44,8 @@ Co-référence, Apprentissage automatique, Pronom anaphorique, Pronom impersonne
 \begin{abstract}
 Co-reference, Machine Learning, Anaphoric pronoun, Expletive pronoun, Anaphora resolution
 \end{abstract}
+
+\color{gray}
 
 \section*{Introduction}
 
@@ -83,9 +85,14 @@ La section~\ref{etat-art} décrit dans un premier temps les travaux existants su
 La section~\ref{xp} présente le déroulement des expériences que nous avons réalisé sur ce corpus.
 Enfin, en section~\ref{resultats}, nous détaillons les résultats obtenus ainsi qu'une discussion sur le travail effectué et sur ce qu'il pourrait être intéressant d'exploiter à l'avenir.
 
+\color{black}
 
 \section{État de l'art}
 \label{etat-art}
+
+\subsection{Caractère impersonnel du \og \textit{il} \fg{}}
+
+\color{gray}
 
 Pour résoudre cette tâche, nous nous sommes appuyés sur les seuls travaux à notre connaissance en français \citep{danlos-ilimp-taln2005} et sur l'un des plus récents pour l'anglais \citep{Bergsma-11}.
 
@@ -152,24 +159,14 @@ Les traits statistiques sont établis grâce à l'énorme banque de données fou
 Les résultats obtenus permettent d'ajouter un trait (un poids) dans le classifieur.
 Seulement, ce corpus étant gigantesque, il a fallu le compresser au maximum. Pour ce faire, diverses techniques ont été utilisées : ne récupérer que les 4-grammes, uniquement ceux contenant \og{}\textit{it}\fg{}, \og{}\textit{they}\fg{} ou \og{}\textit{them}\fg{}, tronquer les mots à 4 caractères, les encoder, ne retenir que les changements d'un 4-gramme à l'autre, etc.
 
-%TODO : ref corpus plus jolies
 NADA a été évalué sur les corpus BBN \cite{BBN}, WSJ-2 (tiré du Penn Treebank \cite{Marcus-1993-BLA-972470.972475}) et ItBank \cite{Bergsma08distributionalidentification}. Les résultats sont similaires pour les 3 corpus (entre 85,1\% et 86,2\%). Par comparaison, l'évaluation a aussi été réalisée avec seulement les traits lexicaux et seulement les traits statistiques, obtenant de moins bons résultats indépendamment (en moyenne 80\% pour les traits lexicaux et 83,5\% pour les traits statistiques).
 
 Les approches par classification obtiennent à l'heure actuelle les meilleurs résultats pour le cas du pronom \og \textit{it} \fg{} anglais, c'est pourquoi nous cherchons à les adapter aux textes français.
 \setcitestyle{authoryear,round}
 
-\paragraph{Résumé Bengston}
-La résolution d'anaphores est la tâche consistant à grouper toutes les mentions d'une même entité dans une classe d'équivalence. Le choix des traits est crucial pour mener cette tâche à bien. %TODO vérifier 1ere phrase
-Les travaux de Bengston et Roth tentent de déterminer l'impact des traits pour la résolution d'anaphores. Ils utilisent un modèle par paires (\textit{pairwise coreference model}). Ils comparent en effet deux à deux les mentions afin de déterminer l'antécédent au plus grand score. Ils se démarquent par le postulat suivant : pour une mention non pronominale, aucun pronom n'est considéré comme antécédent candidat.
+\color{black}
 
-Ils ne considèrent qu'un antécédent au plus pour une mention. Pour réaliser leur corpus d'entraînement, ils utilisent les données ACE (ref). Ils choisissent pour chaque mention $m$, au sein de la classe d'équivalence, la mention la plus proche comme antécédent $a$, et cette paire $(a,m)$ est considérée comme un exemple positif. Ensuite, pour chaque mention $m$, toutes les autres mentions précédentes qui ne sont pas dans la même classe d'équivalence sont des exemples négatifs. Pour apprendre leur fonction d'appariement de coreference, ils utilisent l'algorithme du perceptron.
-%TODO définir tête et modifieur
 
-Les traits se divisent en 8 catégories : le type de la mention, les relations morphologiques, des traits sémantiques, des traits de distance relative, des traits d'apprentissage , l'alignement des modifieurs, des traits de mémorisation et les types d'entité prédits.
-
-L'évaluation est mesurée avec la F-mesure cubique et le F-score de MUC. Ils obtiennent un score de 80.8\% pour la première (1.5 de plus que l'état de l'art à l'époque) et 75.8\% pour la seconde.
-L'impact des features a ensuité été évalué séparément, et il apparaît que les traits relatifs à l'apposition, au pronom relatif, aux distances et à la prédiction des types d'entités sont ceux qui apportent le plus de résultats.
-L'évaluation a aussi été réalisée sur des données brutes, les têtes étant détectées avec les chunks et les extensions par apprentissage automatique. Le score est alors de 78.24\%.
 
 \paragraph{Résumé Li}
 Tandis que de nombreux systèmes de résolution d'anaphores ignorent le problème des pronoms pléonastiques et choisissent de nettoyer leur données, (ref) considère qu'il est très important de les prendre en compte.
@@ -184,46 +181,17 @@ Ils classent le pronom \og it \fg{} selon 4 classes :
 (ref) s'intéressent au cas pléonastique (la troisième classe).
 
 Leur système se décompose en 3 phases : le prétraitement, le filtrage syntaxique puis les requêtes sur le web.
-Lors du prétraitement, (ref) construisent un arbre de dépendances. (TODO détailler ?). Pour le filtrage, on cherche à reconnaître une construction météorologique ou temporelle, puis des patrons permettent de filtrer les clefts et les extraposition.
+Lors du prétraitement, (ref) construisent un arbre de dépendances. (TODO détailler ?). Pour le filtrage, des patrons cherchent à reconnaître une construction météorologique ou temporelle, ainsi que les clefts et les extrapositions.
 Enfin, le web est utilisé pour désambiguïser les données restantes. La question peut se poser quant à l'utilisation du web en tant que corpus, étant donné que celui-ci est mal équilibré, souffre de nombreuses erreurs et est difficile à exploiter. Cependant, (ref) affirment qu'il est pertinent par sa taille, et par sa capacité à évoluer dans le temps (nouveaux termes).
 
 TODO : résultats
 
-\paragraph{Résumé BART}
-(ref) ont développé un outil modulaire permettant de mettre en place facilement des systèmes de résolution de coréférence : BART (\textit{Baltimore Anaphora Resolution Toolkit}).
-Il a été conçu afin de faciliter la recherche dans le domaine de la résolution de coréférence, il est ainsi possible de tester séparément différent modèles de prétraitement, de résolution de coréférence mais aussi de traits spécifiques à cette tâche.
-Implémenté en Java, il s'appuie sur le système EMLR développé par Ponzetto et Strubes (ref) et incorpore des idées provenant du système Guitar (Poesio ref), et des travaux de Versley (ref) et Yang et al (ref).
-Cet outil a été testé avec certains modèles existants, notamment les analyseurs ..... (refs, utile de tous les citer ?), ainsi que les modèles proposés par Soon et al. et Yang et al. pour résoudre ce problème de coréférence.
-
-Pour le prétraitement, BART traite des fichiers encodés avec l'annotation MMAX2. Cette annotation, mise en place par (ref) pour l'outil MMAX, permet de décrire des données à l'aide d'XML. Les phrases, mots et tours pour les langages parlés ou les dialogues (un tour correspondant à la même personne qui s'exprime) sont délimités. Des balises exprimant des \textit{marqueurs} (\textit{markable}) peuvent s'ajouter à la description du document. Un marqueur est une entité abstraite composée d'un ensemble arbitraire d'éléments provenant des données de base. Un marqueur peut par exemple décrire une mention anaphorique.
-
-Une fois les marqueurs définis, la seconde phase du prétraitement consiste à créer des objets \textit{Mention}, grâce à un module spécifique.
-
-Les extracteurs de traits prennent en entrée des paires d'instances. Chaque extracteur est représenté par une classe, pour faciliter les tests ultérieurs et leur modularité, et va puiser des informations contenues dans les Mentions.
-
-Il est ensuite possible d'entraîner plusieurs classifieurs sur un ensemble de traits donné. C'est la phase d'encodage/décodage.
-
-Même si l'objectif principal de cet outil était de créer une plateforme d'expérimentation, il peut être utilisé simplement comme un résolveur d'anaphores, avec des résultats proches de l'état de l'art sur le texte anglais. Evalué sur les données MUC, différent classifieurs ont été testés et il en ressort une F-mesure entre 60\% et 63\%.
 
 
-\paragraph{Résumé Soon}
-Les travaux de (ref) se sont portés sur la résolution de la coréférence pour les syntagmes nominaux. En effet, ils ne se réduisent pas aux pronoms ou à certains types d'entité, mais prennent en considération l'ensemble des groupes nominaux. Ils ont employé une approche à base d'apprentissage automatique, qui ne nécessite pas un corpus gigantesque.
 
-Dans un premier temps, ils déterminent tous les markables (todo) à l'aide d'une cha\^ine de traitement linguistique. Ils génèrent ensuite leurs exemples d'entra\^inement (paires de markables, positives ou négatives) sous forme de vecteurs de traits. Gr\^ace à ces exemples, ils peuvent entra\^iner leur classifieur. Pour tester un nouveau document, ils détectent tous les markables, et les paires possibles sont présentées au classifieur.
+\subsection{Ressources}
 
-La ch\^aine de traitement linguistique leur permettant de déterminer des markables à partir de texte brut se décompose en 7 étapes : la tokénisation et la segmentation en phrases, le traitement morphologique, l'étiquetage morpho-syntaxique, l'identification des syntagmes nominaux, la reconnaissance d'entités nommées, l'extraction de groupes nominaux imbriqués, et la détermination de la classe sémantique. Cette cha\^ine a été évaluée et il en ressort 85\% de markables correctement identifiés.
-
-Pour établir leurs vecteurs de traits, (ref) observent la distance entre les deux markables (l'anaphore \textit{j} et l'antécédent potentiel \textit{i}), si \textit{i} est un pronom, si \textit{j} en est un, si ils sont identiques (en excluant l'article ou le pronom démonstratif), si le syntagme nominal est défini ou démonstratif, si leur nombre ou genre est le m\^eme, ainsi que leur classe sémantique (ou du moins si l'une est parente de l'autre), si tous les deux sont des noms propres, si l'un est un alias de l'autre (par exemple un acronyme, ou si deux entités \textit{Personne} ont le m\^eme nom de famille), et enfin si c'est une apposition.
-
-Les exemples d'entra\^inement positifs sont déterminés comme suit : pour une cha\^ine de coréférence donnée, ils prennent les paires de syntagmes nominaux adjacents. Par exemple, pour la cha\^ine A1--A2--A3, les paires positives sont A1--A2 et A2--A3. Dans une paire, le premier groupe nominal est l'antécédent et le second l'anaphore. Pour générer les exemples négatifs, ils cherchent les autres markables se trouvant entre une anaphore et son antécédent. Par exemple, si l'on s'intéresse à la paire positive A1--A2, et que l'on rencontre dans le texte les markables A1, a, b et A2 dans cet ordre-là, on considère que les paires a--A2 et b--A2 sont négatives.
-
-Les exemples d'entra\^inement extraits sous forme de vecteurs de traits, (ref) utilisent l'algorithme C5, un arbre de décision, pour construire leur classifieur.
-
-Pour un nouveau document de test, ils détectent dans un premier temps tous les markables possibles. Chaque markable est considéré comme une anaphore et pour chacun, tous les markables précédents sont considérés comme antécédents possibles (sauf pour le cas des markables imbriqués). Pour chaque paire (antécédent potentiel--anaphore), on établit un vecteur de traits et le classifieur détermine si elle est succeptible d'\^etre positive. Pour une anaphore donnée, c'est le markable positif le plus proche qui est considéré comme antécédent.
-
-Ce modèle a été évalué sur les corpus issus de MUC6 et MUC7 et obtient des F-mesures atteignant les 60\%. Ces résultats sont comparables aux performances obtenues par les approches qui ne sont pas à base d'apprentissage automatique.
-
-\paragraph{Résumé Candito}
+\paragraph{Résumé Candito (HS)}
 (ref) ont produit une analyse syntaxique statistique à la fois en constituants et en dépendances pour le Français. Leur technique consiste à s'appuyer sur un analyseur statistique en constituants puis de le convertir en dépendances typées. Ils travaillent sur le French Tree Bank (ref). Celui-ci préconise une annotation en constituants, et Candito va s'en inspirer pour définir son propre schéma d'annotation \textit{deps}. 
 
 Pour convertir un arbre syntagmatique de type \textsc{Ftb} vers leur schéma \textit{deps}, ils vont dans un premier temps marquer automatiquement la tête de chaque constituant, en utilisant une table de propagation des têtes (ref). Cette étape permet de remonter sur chaque n\oe{}ud syntagmatique sa tête lexicale, et permet ensuite d'extraire des dépendances partielles. Une deuxième étape va renseigner de nouvelles dépendances non extraites à la première étape, à l'aide d'heuristiques. Puis une étape manuelle va permettre d'ajouter les dernières dépendances. Cette conversion a été évaluée sur une portion du corpus révisée manuellement et donne une F-mesure de plus de 98\%.
@@ -241,16 +209,108 @@ Pour analyser une construction, nous nous intéressons à sa tête ainsi qu'à s
 Le lexique-grammaire du français (Gross Leclère) décrit les structures syntaxiques élémentaires. Cette ressource est constituée de tables, chacune se présentant sous forme matricielle. Chaque ligne représente une entité lexicale, et les colonnes permettent d'identifier les propriétés définitoires propres à cette entité. Il recense notamment toutes les expressions figées contenant le pronom \og \textit{il} \fg{}. Nous pouvons considérer que si elles sont figées, ces expressions sont à caractère impersonnel. Ce lexique-grammaire recense également des verbes ou adjectifs ainsi que leurs propriétés. Ce sont les verbes qui nous intéressent particulièrement puisque le pronom \og \textit{il} \fg{} est un sujet. Pour chaque verbe recensé dans le lexique-grammaire, M. Gross et son équipe donnent un exemple d'utilisation de celui-ci. Il se trouve que si le verbe est anaphorique, le sujet de l'exemple est principalement un nom propre ou un groupe nominal. A l'inverse, les exemples des verbes impersonnels ne peuvent contenir comme sujet que le \og \textit{il} \fg{}. Nous pouvons donc extraire ces informations et lister les verbes ancrant des constructions impersonnelles.
 
 \paragraph{Lefff}
-A la suite de son travail sur l'outil ILIMP, Laurence Danlos accompagnée de Benoît Sagot a mis en place un lexique morphologique et syntaxique du français : Le Lefff (Lexique des Formes Fléchies du Français)
+Benoît Sagot a mis en place un lexique morphologique et syntaxique du français : Le Lefff (Lexique des Formes Fléchies du Français). C'est un lexique électronique recensant toutes les formes fléchies de la langue française, et qui présente des informations morphologiques et syntaxiques pour chacune d'entre elles. Moins riche que le lexique-grammaire, il a pour avantage d'être facilement utilisable dans les applications de Traitement Automatique du Langage.
+
+Il recense plus de 110 000 lemmes, correspondant à plus de 520 000 entrées (formes verbales, certaines formes adjectivales et nominales, prépositions, \ldots). A chaque entrée, sont renseignées les informations syntaxiques, mais aussi des propriétés qui vont permettre d'établir un cadre de sous-catégorisation à la forme fléchie.
+
+En 2006, B. Sangot et L. Danlos ont entreprit de l'enrichir à l'aide des informations fournies par le lexique-grammaire, en particulier pour les constructions impersonnelles et les expressions verbales figées. Danlos a ainsi repris son travail sur l'outil ILIMP et en a extrait les informations pouvant être apportées au Lefff. Le travail a été plus complexe pour le cas des expressions verbales figées, il est donc encore en cours de recherche.
+
+
+\subsection{Résolution d'anaphores}
+
+\paragraph{Résumé Bengston}
+La résolution d'anaphores est la tâche consistant à grouper toutes les mentions d'une même entité dans une classe d'équivalence. Le choix des traits est crucial pour mener cette tâche à bien.
+
+Les travaux de Bengston et Roth tentent de déterminer l'impact des traits pour la résolution d'anaphores. Ils utilisent un modèle par paires (\textit{pairwise coreference model}). Ils comparent en effet deux à deux les mentions afin de déterminer l'antécédent au plus grand score. Ils se démarquent par le postulat suivant : pour une mention non pronominale, aucun pronom n'est considéré comme antécédent candidat.
+
+Ils ne considèrent qu'un antécédent au plus pour une mention. Pour réaliser leur corpus d'entraînement, ils utilisent les données ACE (ref). Ils choisissent pour chaque mention $m$, au sein de la classe d'équivalence, la mention la plus proche comme antécédent $a$, et cette paire $(a,m)$ est considérée comme un exemple positif. Ensuite, pour chaque mention $m$, toutes les autres mentions précédentes qui ne sont pas dans la même classe d'équivalence sont des exemples négatifs. Pour apprendre leur fonction d'appariement de coreference, ils utilisent l'algorithme du perceptron.
+
+TODO définir tête et modifieur
+
+Les traits se divisent en 8 catégories : le type de la mention, les relations morphologiques, des traits sémantiques, des traits de distance relative, des traits d'apprentissage , l'alignement des modifieurs, des traits de mémorisation et les types d'entité prédits.
+
+L'évaluation est mesurée avec la F-mesure cubique et le F-score de MUC. Ils obtiennent un score de 80.8\% pour la première (1.5 de plus que l'état de l'art à l'époque) et 75.8\% pour la seconde.
+L'impact des features a ensuité été évalué séparément, et il apparaît que les traits relatifs à l'apposition, au pronom relatif, aux distances et à la prédiction des types d'entités sont ceux qui apportent le plus de résultats.
+L'évaluation a aussi été réalisée sur des données brutes, les têtes étant détectées avec les chunks et les extensions par apprentissage automatique. Le score est alors de 78.24\%.
+
+\paragraph{Résumé Soon}
+Les travaux de (ref) se sont portés sur la résolution de la coréférence pour les syntagmes nominaux. En effet, ils ne se réduisent pas aux pronoms ou à certains types d'entité, mais prennent en considération l'ensemble des groupes nominaux. Ils ont employé une approche à base d'apprentissage automatique, qui ne nécessite pas un corpus gigantesque.
+
+Dans un premier temps, ils déterminent tous les markables (todo) à l'aide d'une cha\^ine de traitement linguistique. Ils génèrent ensuite leurs exemples d'entra\^inement (paires de markables, positives ou négatives) sous forme de vecteurs de traits. Gr\^ace à ces exemples, ils peuvent entra\^iner leur classifieur. Pour tester un nouveau document, ils détectent tous les markables, et les paires possibles sont présentées au classifieur.
+
+La cha\^ine de traitement linguistique leur permettant de déterminer des markables à partir de texte brut se décompose en 7 étapes : la tokénisation et la segmentation en phrases, le traitement morphologique, l'étiquetage morpho-syntaxique, l'identification des syntagmes nominaux, la reconnaissance d'entités nommées, l'extraction de groupes nominaux imbriqués, et la détermination de la classe sémantique. Cette cha\^ine a été évaluée et il en ressort 85\% de markables correctement identifiés.
+
+Pour établir leurs vecteurs de traits, (ref) observent la distance entre les deux markables (l'anaphore \textit{j} et l'antécédent potentiel \textit{i}), si \textit{i} est un pronom, si \textit{j} en est un, si ils sont identiques (en excluant l'article ou le pronom démonstratif), si le syntagme nominal est défini ou démonstratif, si leur nombre ou genre est le m\^eme, ainsi que leur classe sémantique (ou du moins si l'une est parente de l'autre), si tous les deux sont des noms propres, si l'un est un alias de l'autre (par exemple un acronyme, ou si deux entités \textit{Personne} ont le m\^eme nom de famille), et enfin si c'est une apposition.
+
+Les exemples d'entra\^inement positifs sont déterminés comme suit : pour une cha\^ine de coréférence donnée, ils prennent les paires de syntagmes nominaux adjacents. Par exemple, pour la cha\^ine A1--A2--A3, les paires positives sont A1--A2 et A2--A3. Dans une paire, le premier groupe nominal est l'antécédent et le second l'anaphore. Pour générer les exemples négatifs, ils cherchent les autres markables se trouvant entre une anaphore et son antécédent. Par exemple, si l'on s'intéresse à la paire positive A1--A2, et que l'on rencontre dans le texte les markables A1, a, b et A2 dans cet ordre-là, on considère que les paires a--A2 et b--A2 sont négatives.
+
+Les exemples d'entra\^inement extraits sous forme de vecteurs de traits, (ref) utilisent l'algorithme C5, un arbre de décision, pour construire leur classifieur.
+
+Pour un nouveau document de test, ils détectent dans un premier temps tous les markables possibles. Chaque markable est considéré comme une anaphore et pour chacun, tous les markables précédents sont considérés comme antécédents possibles (sauf pour le cas des markables imbriqués). Pour chaque paire (antécédent potentiel--anaphore), on établit un vecteur de traits et le classifieur détermine si elle est succeptible d'\^etre positive. Pour une anaphore donnée, c'est le markable positif le plus proche qui est considéré comme antécédent.
+
+Ce modèle a été évalué sur les corpus issus de MUC6 et MUC7 et obtient des F-mesures atteignant les 60\%. Ces résultats sont comparables aux performances obtenues par les approches qui ne sont pas à base d'apprentissage automatique.
+
+\paragraph{Résumé BART}
+(ref) ont développé un outil modulaire permettant de mettre en place facilement des systèmes de résolution de coréférence : BART (\textit{Baltimore Anaphora Resolution Toolkit}).
+Il a été conçu afin de faciliter la recherche dans le domaine de la résolution de coréférence, il est ainsi possible de tester séparément différent modèles de prétraitement, de résolution de coréférence mais aussi de traits spécifiques à cette tâche.
+Implémenté en Java, il s'appuie sur le système EMLR développé par Ponzetto et Strubes (ref) et incorpore des idées provenant du système Guitar (Poesio ref), et des travaux de Versley (ref) et Yang et al (ref).
+Cet outil a été testé avec certains modèles existants, notamment les analyseurs ..... (refs, utile de tous les citer ?), ainsi que les modèles proposés par Soon et al. et Yang et al. pour résoudre ce problème de coréférence.
+
+Pour le prétraitement, BART traite des fichiers encodés avec l'annotation MMAX2. Cette annotation, mise en place par (ref) pour l'outil MMAX, permet de décrire des données à l'aide d'XML. Les phrases, mots et tours pour les langages parlés ou les dialogues (un tour correspondant à la même personne qui s'exprime) sont délimités. Des balises exprimant des \textit{marqueurs} (\textit{markable}) peuvent s'ajouter à la description du document. Un marqueur est une entité abstraite composée d'un ensemble arbitraire d'éléments provenant des données de base. Un marqueur peut par exemple décrire une mention anaphorique.
+
+Une fois les marqueurs définis, la seconde phase du prétraitement consiste à créer des objets \textit{Mention}, grâce à un module spécifique.
+
+Les extracteurs de traits prennent en entrée des paires d'instances. Chaque extracteur est représenté par une classe, pour faciliter les tests ultérieurs et leur modularité, et va puiser des informations contenues dans les Mentions.
+
+Il est ensuite possible d'entraîner plusieurs classifieurs sur un ensemble de traits donné. C'est la phase d'encodage/décodage.
+
+Même si l'objectif principal de cet outil était de créer une plateforme d'expérimentation, il peut être utilisé simplement comme un résolveur d'anaphores, avec des résultats proches de l'état de l'art sur le texte anglais. Evalué sur les données MUC, différent classifieurs ont été testés et il en ressort une F-mesure entre 60\% et 63\%.
+
+\paragraph{Stanford}
+Alors que la plupart des systèmes de résolution de coréférence  s'intéressent aux mentions deux à deux, à l'aide d'une fonction d'\og appariement \fg{} (\textit{pairwise}), certains travaux commencent à envisager cette tâche d'une manière plus globale. En effet, ils cherchent à élaborer des clusters pointant sur la même entité, au lieu de chercher si 2 mentions précises sont coréférentes. C'est le cas par exemple des recherches de Rhagu et al (ref). Leur particularité est de résoudre le problème en plusieurs étapes, en incorporant des traits petit à petit. Ils partent des traits obtenant la meilleure précision, puis ajoutent au fur et à mesure des traits de moins bonne précision mais ayant un meilleur rappel. Chaque étape produit des clusters, qui sont ensuite donnés en entrée à l'étape suivante. Cette technique permet de favoriser les traits les plus robustes.
+Rhagu a eu recours à 7 étapes pour former ses clusters. Evalué sur un corpora extrait d'ACE2004 et MUC6, il obtient des résultats équivalents voire meilleurs que les travaux état de l'art, selon les mesures employées (pairwise F1, B\up{3} et MUC). Ils montrent aussi que l'incorporation des traits en plusieurs étapes est plus efficace qu'en une seule.
+
+Ces travaux ont par la suite été repris et améliorés par la même équipe, afin de participer à CONLL.
+
+TODO CONLL
+
+Ils ont en effet ajouté 5 étapes, ont incorporé une étape de détection de mention au début de la chaîne de traitement, ainsi qu'une étape de post-traitement permettant de rendre leur système compatible avec les spécifications de la tâche.
+
+TODO shared task OntoNotes
+
+Ce système a obtenu les meilleurs scores pour les deux tâches (ouverte 57.8 et fermée 58.3).
 
 \section{Corpus de travail}
 \label{corpus}
+
+\color{gray}
 
 Nous avons à disposition pour nos expérimentations le corpus annoté par \citet{tutin-hal-00373327}.
 Cette ressource, composée d'un million de mots, annote une grande partie des expressions anaphoriques, même si certaines sont rejetées car trop complexes. Les expressions retenues appartiennent à des classes fermées, telles les pronoms personnels, les déterminants possessifs, les pronoms démonstratifs,\ldots
 L'annotation permet d'indiquer les éléments mis en jeu ainsi que la relation entre l'expression anaphorique et son(ses) antécédent(s). Cette relation peut appartenir à l'une des 5 classes suivantes : coréférence, membre de, description, phrase ou indéfinie.
 
 L'annotation a été faite à la main par deux linguistes (le processus n'est pas exclusivement manuel puisque les expressions sont pré-annotées automatiquement et des outils d'édition sont utilisés pour simplifier la tâche), au format XML. Afin de mesurer la fiabilité de l'annotation, une évaluation sur 5\% du corpus a été effectuée.
+
+\color{black}
+
+\paragraph{Stats}
+TODO A bouger + rédiger
+
+\paragraph*{}
+\begin{tabular}{|l|r|r|r|c|}
+   \hline
+   \textsc{Corpus} & \textsc{Imp} & \textsc{Ana} & \textsc{Total} & \textsc{Proportion Imp}\\
+   \hline
+   Stendhal & 2239 & 1240 & 3479 & 64\%\\
+   Stendhal articles Hermès & 558 & 371 & 929 & 60\%\\
+   XRCE JOC & 1043 & 373 & 1416 & 74\%\\
+   XRCE Le Monde & 695 & 567 & 1262 & 55\%\\
+   \hline
+   \textsc{Total} & 4535 & 2551 & 7096 & 64\%\\
+   \hline
+\end{tabular}
+
+\color{gray}
 
 \paragraph{}
 Nous travaillons sur la portion du corpus contenant les articles du journal \emph{Le Monde} (rubrique économie). Cette portion contient 202 091 mots. Ceci nous permet d'établir rapidement notre processus d'extraction de traits.
@@ -273,8 +333,12 @@ Nous divisons ce corpus en 3 parties. Un dixième constitue le corpus de dévelo
 C'est sur cette dernière partie que nous travaillons ensuite.
 Le corpus de test demeure quant-à lui inchangé et non consulté durant toute cette phase de tests, puisque nous réservons son usage à de futurs travaux.
 
+\color{black}
+
 \section{Compilation des traits recensés dans la littérature et enrichis par l'observation}
 \label{approche-traits}
+
+\color{gray}
 
 D'après \citeauthor{danlos-ilimp-taln2005}, les constructions impersonnelles reposent sur des conditions tant lexicales que syntaxiques. Pour les propriétés syntaxiques, des traits peuvent \^etre obtenus grâce à un simple étiquetage morpho-syntaxique, et une observation de ces étiquettes pour les tokens entourant l'occurrence de \og \textit{il} \fg{}. Afin d'extraire les informations lexicales, nous avons fait appel à une heuristique naïve : nous cherchons à décrire la tête lexicale en observant le premier verbe, adjectif ou adverbe suivant l'occurrence de \og \textit{il} \fg{}, en effet l'un d'entre eux constitue cette tête lexicale.
 
@@ -283,7 +347,7 @@ Nous observons également les combinaisons telles que le premier verbe + la prem
 
 La présence de certains éléments particuliers peut aussi caractériser des constructions anaphoriques : le pronom \og \textit{lui} \fg{}, les déterminants possessifs à la 3\up{ème} personne du singulier, d'autres occurrences de \og \textit{il} \fg{}, etc. La présence d'acronymes ou de noms propres peut quant à elle suggérer l'existence d'un antécédent, donc le caractère anaphorique du pronom (nous n'implémentons pas ces deux éléments lors de nos expériences, car ils nécessitent une reconnaissance préalable des entités nommées).
 
-
+\color{black}
 
 \section*{Conclusion}
 
